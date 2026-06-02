@@ -314,15 +314,15 @@
 </div>
 
 <nav class="cat-nav" id="catNav">
-  <button class="cat-btn active" onclick="scrollTo('salades', this)">🥗 Salades</button>
-  <button class="cat-btn" onclick="scrollTo('fastfood', this)">🍔 Fast Food</button>
-  <button class="cat-btn" onclick="scrollTo('pizzas', this)">🍕 Pizzas</button>
-  <button class="cat-btn" onclick="scrollTo('paninis', this)">🥖 Paninis</button>
-  <button class="cat-btn" onclick="scrollTo('grillades', this)">🔥 Grillades</button>
-  <button class="cat-btn" onclick="scrollTo('pates', this)">🍝 Pâtes</button>
-  <button class="cat-btn" onclick="scrollTo('africain', this)">🍲 Plats Africains</button>
-  <button class="cat-btn" onclick="scrollTo('accomp', this)">🍚 Accompagnements</button>
-  <button class="cat-btn" onclick="scrollTo('boissons', this)">🥤 Boissons</button>
+  <button class="cat-btn active" onclick="goTo('salades', this)">🥗 Salades</button>
+  <button class="cat-btn" onclick="goTo('fastfood', this)">🍔 Fast Food</button>
+  <button class="cat-btn" onclick="goTo('pizzas', this)">🍕 Pizzas</button>
+  <button class="cat-btn" onclick="goTo('paninis', this)">🥖 Paninis</button>
+  <button class="cat-btn" onclick="goTo('grillades', this)">🔥 Grillades</button>
+  <button class="cat-btn" onclick="goTo('pates', this)">🍝 Pâtes</button>
+  <button class="cat-btn" onclick="goTo('africain', this)">🍲 Plats Africains</button>
+  <button class="cat-btn" onclick="goTo('accomp', this)">🍚 Accompagnements</button>
+  <button class="cat-btn" onclick="goTo('boissons', this)">🥤 Boissons</button>
 </nav>
 
 <main id="menuMain">
@@ -580,7 +580,7 @@
     `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Bonjour O'big Food ! Je souhaite passer une commande 🙂")}`;
 
   // Navigation catégories
-  function scrollTo(id, btn) {
+  function goTo(id, btn) {
     document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
     document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -596,7 +596,7 @@
       if (entry.isIntersecting) {
         const id = entry.target.id;
         catBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('onclick')?.includes(`'${id}'`));
+          btn.classList.toggle('active', btn.getAttribute('onclick')?.includes(`'${id}'`) ?? false);
         });
       }
     });
