@@ -96,13 +96,34 @@
 
     /* ACCOMPAGNEMENTS */
     .accomp-grid { display:flex; flex-wrap:wrap; gap:8px; padding:4px 16px 12px; }
-    .accomp-tag { background:#f0f7f4; color:var(--green); border:1px solid #c8e6d8; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:600; }
+    .accomp-tag {
+      background:#f0f7f4; color:var(--green); border:1px solid #c8e6d8;
+      border-radius:20px; padding:5px 12px; font-size:11px; font-weight:600;
+      display:inline-flex; align-items:center; gap:6px;
+      cursor:pointer; transition:background 0.15s, border-color 0.15s;
+      user-select:none;
+    }
+    .accomp-tag:hover { background:#d4ede2; border-color:#95d5b2; }
+    .accomp-tag:active { transform:scale(0.96); }
+    .accomp-plus { font-size:13px; font-weight:800; opacity:0.6; }
     .accomp-note { font-size:11px; color:var(--muted); font-style:italic; padding:0 16px 12px; }
 
     /* BOISSONS */
     .drinks-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 16px; }
     .drink-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:12px; border-left:4px solid var(--gold); }
-    .drink-name { font-size:12px; font-weight:600; margin-bottom:4px; }
+    .drink-card-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; }
+    .drink-name { font-size:12px; font-weight:600; flex:1; }
+    .drink-add-btn {
+      flex-shrink:0; width:22px; height:22px;
+      background:transparent; color:var(--gold);
+      border:1.5px solid var(--gold); border-radius:6px;
+      font-size:13px; font-weight:700; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      transition:background 0.15s, color 0.15s, transform 0.1s;
+      margin-left:6px;
+    }
+    .drink-add-btn:hover { background:var(--gold); color:white; }
+    .drink-add-btn:active { transform:scale(0.88); }
     .drink-items { font-size:11px; color:var(--muted); line-height:1.5; }
     .drink-price { font-size:12px; font-weight:700; color:var(--green); margin-top:6px; }
 
@@ -236,16 +257,21 @@ function renderMenu(data) {
       html += `</div>`;
     } else if (cat.type === 'tags') {
       html += `<div class="accomp-grid">`;
-      cat.tags.forEach(t => { html += `<span class="accomp-tag">${t}</span>`; });
+      cat.tags.forEach(t => {
+        html += `<span class="accomp-tag" data-name="${t}" data-price="1.000F">${t}<span class="accomp-plus">+</span></span>`;
+      });
       html += `</div>`;
       if (cat.note) html += `<p class="accomp-note">${cat.note}</p>`;
     } else if (cat.type === 'drinks') {
       html += `<div class="drinks-grid">`;
       cat.drinks.forEach(d => {
         const wide = d.wide ? ' style="grid-column:span 2"' : '';
-        html += `<div class="drink-card"${wide}><div class="drink-name">${d.name}</div><div class="drink-items">${d.items}</div>`;
-        if (d.price) html += `<div class="drink-price">${d.price}</div>`;
-        html += `</div>`;
+        const addBtn = d.price ? `<button class="drink-add-btn" data-name="${d.name}" data-price="${d.price}" aria-label="Ajouter">+</button>` : '';
+        html += `<div class="drink-card"${wide}>
+          <div class="drink-card-top"><div class="drink-name">${d.name}</div>${addBtn}</div>
+          <div class="drink-items">${d.items}</div>
+          ${d.price ? `<div class="drink-price">${d.price}</div>` : ''}
+        </div>`;
       });
       html += `</div><div style="height:16px"></div>`;
     }
@@ -330,6 +356,24 @@ function initCart() {
       setTimeout(() => (btn.style.transform = ''), 180);
     });
     item.querySelector('.item-body').appendChild(btn);
+  });
+
+  // Accompagnements tags
+  document.querySelectorAll('.accomp-tag[data-name]').forEach(tag => {
+    tag.addEventListener('click', () => {
+      addToCart(tag.dataset.name, tag.dataset.price);
+      tag.style.transform = 'scale(1.12)';
+      setTimeout(() => (tag.style.transform = ''), 180);
+    });
+  });
+
+  // Drink cards
+  document.querySelectorAll('.drink-add-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      addToCart(btn.dataset.name, btn.dataset.price);
+      btn.style.transform = 'scale(1.35)';
+      setTimeout(() => (btn.style.transform = ''), 180);
+    });
   });
 
   document.getElementById('cartClose').addEventListener('click', closeCart);
