@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
       --green: #2d6a4f;
       --green-light: #40916c;
@@ -22,283 +21,103 @@
       --border: #e8e4dc;
       --radius: 14px;
     }
-
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
     /* HEADER */
     header {
       background: linear-gradient(135deg, var(--green) 0%, var(--green-light) 100%);
-      color: white;
-      text-align: center;
-      padding: 32px 20px 24px;
-      position: relative;
-      overflow: hidden;
+      color: white; text-align: center; padding: 32px 20px 24px;
+      position: relative; overflow: hidden;
     }
-    header::before {
-      content: '';
-      position: absolute;
-      top: -40px; right: -40px;
-      width: 180px; height: 180px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 50%;
-    }
-    header::after {
-      content: '';
-      position: absolute;
-      bottom: -60px; left: -30px;
-      width: 220px; height: 220px;
-      background: rgba(255,255,255,0.04);
-      border-radius: 50%;
-    }
-    .header-badge {
-      display: inline-block;
-      background: var(--gold);
-      color: #1a1a1a;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-bottom: 10px;
-    }
-    header h1 {
-      font-size: 36px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      line-height: 1;
-    }
-    header h1 span { color: var(--gold-light); }
-    header p {
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      opacity: 0.8;
-      margin-top: 6px;
-    }
-
-    /* NAV CATÉGORIES */
-    .cat-nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      padding: 0 12px;
-      overflow-x: auto;
-      display: flex;
-      gap: 4px;
-      scrollbar-width: none;
-    }
-    .cat-nav::-webkit-scrollbar { display: none; }
-    .cat-btn {
-      flex-shrink: 0;
-      padding: 12px 14px;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--muted);
-      background: none;
-      border: none;
-      border-bottom: 3px solid transparent;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-      font-family: 'Poppins', sans-serif;
-    }
-    .cat-btn.active, .cat-btn:hover {
-      color: var(--green);
-      border-bottom-color: var(--green);
-    }
-
-    /* MAIN */
-    main { padding: 0 0 120px; max-width: 680px; margin: 0 auto; }
-
-    /* SECTION */
-    .section { padding: 28px 16px 8px; }
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-    .section-icon {
-      width: 36px; height: 36px;
-      background: var(--green);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-    .section-title {
-      font-size: 18px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .section-divider {
-      height: 2px;
-      background: linear-gradient(to right, var(--green), transparent);
-      margin-bottom: 16px;
-      border-radius: 2px;
-    }
-
-    /* PLAT CARD */
-    .item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 14px 16px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 12px;
-      transition: box-shadow 0.2s;
-    }
-    .item:active { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
-    .item-info { flex: 1; }
-    .item-name {
-      font-size: 14px;
-      font-weight: 600;
-      line-height: 1.3;
-      margin-bottom: 4px;
-    }
-    .item-desc {
-      font-size: 12px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .item-price {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--green);
-      white-space: nowrap;
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .item-price small {
-      display: block;
-      font-size: 10px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    /* ACCOMPAGNEMENTS */
-    .accomp-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 4px 0 12px;
-    }
-    .accomp-tag {
-      background: #f0f7f4;
-      color: var(--green);
-      border: 1px solid #c8e6d8;
-      border-radius: 20px;
-      padding: 5px 12px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-    .accomp-note {
-      font-size: 11px;
-      color: var(--muted);
-      font-style: italic;
-      padding: 0 4px 12px;
-    }
-
-    /* BOISSONS GRID */
-    .drinks-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-    .drink-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 12px;
-    }
-    .drink-name {
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-    .drink-items {
-      font-size: 11px;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-    .drink-price {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--green);
-      margin-top: 4px;
-    }
-
-    /* WHATSAPP CTA */
-    .wa-bar {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      background: white;
-      border-top: 1px solid var(--border);
-      padding: 12px 16px;
-      z-index: 200;
-      max-width: 680px;
-      margin: 0 auto;
-    }
-    .wa-btn {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      background: #25d366;
-      color: white;
-      border: none;
-      border-radius: 14px;
-      padding: 14px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Poppins', sans-serif;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .wa-btn:hover { background: #20b958; }
-    .wa-icon { font-size: 20px; }
+    header::before { content:''; position:absolute; top:-40px; right:-40px; width:180px; height:180px; background:rgba(255,255,255,0.06); border-radius:50%; }
+    header::after  { content:''; position:absolute; bottom:-60px; left:-30px; width:220px; height:220px; background:rgba(255,255,255,0.04); border-radius:50%; }
+    .header-badge { display:inline-block; background:var(--gold); color:#1a1a1a; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; padding:4px 12px; border-radius:20px; margin-bottom:10px; }
+    header h1 { font-size:36px; font-weight:800; letter-spacing:-0.5px; line-height:1; }
+    header h1 span { color:var(--gold-light); }
+    header p { font-size:12px; letter-spacing:3px; text-transform:uppercase; opacity:0.8; margin-top:6px; }
 
     /* SEARCH */
-    .search-bar {
-      padding: 12px 16px 0;
-      max-width: 680px;
-      margin: 0 auto;
-    }
+    .search-wrap { background:white; padding:10px 16px; border-bottom:1px solid var(--border); }
     .search-input {
-      width: 100%;
-      padding: 11px 16px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 14px;
-      font-family: 'Poppins', sans-serif;
-      background: white;
-      outline: none;
-      transition: border-color 0.2s;
+      width:100%; padding:10px 16px 10px 40px; border:1.5px solid var(--border);
+      border-radius:12px; font-size:14px; font-family:'Poppins',sans-serif;
+      background:#faf9f6 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.868-3.834zm-5.242 1.156a5 5 0 1 1 0-10 5 5 0 0 1 0 10z'/%3E%3C/svg%3E") no-repeat 14px center;
+      outline:none; transition:border-color 0.2s;
     }
-    .search-input:focus { border-color: var(--green); }
+    .search-input:focus { border-color:var(--green); }
 
-    .no-result {
-      text-align: center;
-      color: var(--muted);
-      padding: 40px 20px;
-      font-size: 14px;
+    /* NAV */
+    .cat-nav {
+      position:sticky; top:0; z-index:100; background:white;
+      border-bottom:1px solid var(--border); padding:0 12px;
+      overflow-x:auto; display:flex; gap:4px; scrollbar-width:none;
     }
+    .cat-nav::-webkit-scrollbar { display:none; }
+    .cat-btn {
+      flex-shrink:0; padding:12px 14px; font-size:12px; font-weight:600;
+      color:var(--muted); background:none; border:none;
+      border-bottom:3px solid transparent; cursor:pointer;
+      transition:all 0.2s; white-space:nowrap; font-family:'Poppins',sans-serif;
+    }
+    .cat-btn.active, .cat-btn:hover { color:var(--green); border-bottom-color:var(--green); }
+
+    /* MAIN */
+    main { padding:0 0 120px; max-width:680px; margin:0 auto; }
+
+    /* SECTION */
+    .section { padding:0 0 8px; }
+
+    /* SECTION BANNER IMAGE */
+    .section-banner {
+      width:100%; height:160px; object-fit:cover;
+      display:block; margin-bottom:0;
+    }
+    .section-header {
+      display:flex; align-items:center; gap:10px;
+      padding:18px 16px 8px;
+    }
+    .section-icon {
+      width:36px; height:36px; background:var(--green); border-radius:10px;
+      display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+    }
+    .section-title { font-size:18px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; }
+    .section-divider { height:2px; background:linear-gradient(to right,var(--green),transparent); margin:0 16px 14px; border-radius:2px; }
+    .section-items { padding:0 16px; }
+
+    /* ITEM CARD */
+    .item {
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:0; margin-bottom:10px; display:flex; overflow:hidden;
+      transition:box-shadow 0.2s; border-left:4px solid var(--green);
+    }
+    .item-body { flex:1; padding:13px 14px; display:flex; justify-content:space-between; align-items:flex-start; gap:10px; }
+    .item-info { flex:1; }
+    .item-name { font-size:14px; font-weight:600; line-height:1.3; margin-bottom:3px; }
+    .item-desc { font-size:11px; color:var(--muted); line-height:1.5; }
+    .item-price { font-size:13px; font-weight:700; color:var(--green); white-space:nowrap; text-align:right; flex-shrink:0; }
+    .item-price small { display:block; font-size:10px; color:var(--muted); font-weight:400; }
+
+    /* ACCOMPAGNEMENTS */
+    .accomp-grid { display:flex; flex-wrap:wrap; gap:8px; padding:4px 16px 12px; }
+    .accomp-tag { background:#f0f7f4; color:var(--green); border:1px solid #c8e6d8; border-radius:20px; padding:5px 12px; font-size:11px; font-weight:600; }
+    .accomp-note { font-size:11px; color:var(--muted); font-style:italic; padding:0 16px 12px; }
+
+    /* BOISSONS */
+    .drinks-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:0 16px; }
+    .drink-card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:12px; border-left:4px solid var(--gold); }
+    .drink-name { font-size:12px; font-weight:600; margin-bottom:4px; }
+    .drink-items { font-size:11px; color:var(--muted); line-height:1.5; }
+    .drink-price { font-size:12px; font-weight:700; color:var(--green); margin-top:6px; }
+
+    /* WA */
+    .wa-bar { position:fixed; bottom:0; left:0; right:0; background:white; border-top:1px solid var(--border); padding:12px 16px; z-index:200; }
+    .wa-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; background:#25d366; color:white; border:none; border-radius:14px; padding:14px; font-size:15px; font-weight:700; font-family:'Poppins',sans-serif; cursor:pointer; text-decoration:none; transition:background 0.2s; }
+    .wa-btn:hover { background:#20b958; }
+
+    /* NO RESULT */
+    .no-result { text-align:center; color:var(--muted); padding:40px 20px; font-size:14px; display:none; }
+    .no-result.visible { display:block; }
   </style>
 </head>
 <body>
@@ -309,335 +128,300 @@
   <p>Découvrez notre carte</p>
 </header>
 
-<div class="search-bar">
-  <input class="search-input" type="search" id="search" placeholder="🔍  Rechercher un plat..." oninput="filterMenu(this.value)" />
+<div class="search-wrap">
+  <input class="search-input" type="search" id="search" placeholder="Rechercher un plat..." autocomplete="off" />
 </div>
 
 <nav class="cat-nav" id="catNav">
-  <button class="cat-btn active" onclick="goTo('salades', this)">🥗 Salades</button>
-  <button class="cat-btn" onclick="goTo('fastfood', this)">🍔 Fast Food</button>
-  <button class="cat-btn" onclick="goTo('pizzas', this)">🍕 Pizzas</button>
-  <button class="cat-btn" onclick="goTo('paninis', this)">🥖 Paninis</button>
-  <button class="cat-btn" onclick="goTo('grillades', this)">🔥 Grillades</button>
-  <button class="cat-btn" onclick="goTo('pates', this)">🍝 Pâtes</button>
-  <button class="cat-btn" onclick="goTo('africain', this)">🍲 Plats Africains</button>
-  <button class="cat-btn" onclick="goTo('accomp', this)">🍚 Accompagnements</button>
-  <button class="cat-btn" onclick="goTo('boissons', this)">🥤 Boissons</button>
+  <button class="cat-btn active" data-target="salades">🥗 Salades</button>
+  <button class="cat-btn" data-target="fastfood">🍔 Fast Food</button>
+  <button class="cat-btn" data-target="pizzas">🍕 Pizzas</button>
+  <button class="cat-btn" data-target="paninis">🥖 Paninis</button>
+  <button class="cat-btn" data-target="grillades">🔥 Grillades</button>
+  <button class="cat-btn" data-target="pates">🍝 Pâtes & Riz</button>
+  <button class="cat-btn" data-target="africain">🍲 Plats Africains</button>
+  <button class="cat-btn" data-target="accomp">🍚 Accompagnements</button>
+  <button class="cat-btn" data-target="boissons">🥤 Boissons</button>
 </nav>
 
 <main id="menuMain">
+  <p class="no-result" id="noResult">Aucun plat trouvé.</p>
 
   <!-- SALADES -->
   <section class="section" id="salades">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1512621776951-a57ef51be9f4?w=680&h=160&fit=crop&auto=format" alt="Salades" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🥗</div>
       <h2 class="section-title">Nos Salades</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Big Classic</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, viande hachée</div></div><div class="item-price">2.100F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Poulet Plancha</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, poulet plancha</div></div><div class="item-price">3.100F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Boulettes de Bœuf</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, boulette de bœuf</div></div><div class="item-price">2.600F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Boulettes de Poisson</div><div class="item-desc">Laitue, pomme de terre, carotte, betterave, petit pois, maïs doux, boulette de poisson</div></div><div class="item-price">2.100F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Jambon Mozzarella</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, tomate, olives noires, jambon de volaille, mozzarella</div></div><div class="item-price">2.600F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Niçoise</div><div class="item-desc">Laitue, pomme de terre, haricot vert, tomate, olives noires, œuf dur, thon</div></div><div class="item-price">2.600F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Niçoise Revisitée</div><div class="item-desc">Laitue, pomme de terre, concombre, tomate, maïs doux, œuf dur, thon</div></div><div class="item-price">2.600F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Big Avocat Crevette</div><div class="item-desc">Laitue, pomme de terre, concombre, tomate, olives noires, avocat, crevettes</div></div><div class="item-price">3.600F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Salade du Chef</div><div class="item-desc">Laitue, tomate, poivron, émincé de poulet, olives noires, carotte, thon</div></div><div class="item-price">3.600F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Classic</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, viande hachée</div></div><div class="item-price">2.100F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Poulet Plancha</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, poulet plancha</div></div><div class="item-price">3.100F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Boulettes de Bœuf</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, boulette de bœuf</div></div><div class="item-price">2.600F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Boulettes de Poisson</div><div class="item-desc">Laitue, pomme de terre, carotte, betterave, petit pois, maïs doux, boulette de poisson</div></div><div class="item-price">2.100F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Jambon Mozzarella</div><div class="item-desc">Laitue, pomme de terre, carotte, concombre, tomate, olives noires, jambon, mozzarella</div></div><div class="item-price">2.600F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Niçoise</div><div class="item-desc">Laitue, pomme de terre, haricot vert, tomate, olives noires, œuf dur, thon</div></div><div class="item-price">2.600F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Niçoise Revisitée</div><div class="item-desc">Laitue, pomme de terre, concombre, tomate, maïs doux, œuf dur, thon</div></div><div class="item-price">2.600F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Big Avocat Crevette</div><div class="item-desc">Laitue, pomme de terre, concombre, tomate, olives noires, avocat, crevettes</div></div><div class="item-price">3.600F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Salade du Chef</div><div class="item-desc">Laitue, tomate, poivron, émincé de poulet, olives noires, carotte, thon</div></div><div class="item-price">3.600F</div></div></div>
+    </div>
   </section>
 
   <!-- FAST FOOD -->
   <section class="section" id="fastfood">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=680&h=160&fit=crop&auto=format" alt="Burgers & Sandwiches" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🍔</div>
       <h2 class="section-title">Fast Food</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Sandwich à la Viande</div></div><div class="item-price">1.500F / 2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sandwich au Poulet</div></div><div class="item-price">1.500F / 2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sandwich Combo</div></div><div class="item-price">1.500F / 2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Crispy Sandwich</div><div class="item-desc">Poulet pané, salade de choux, cornichons, ketchup, frites</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Zinger Sandwich</div><div class="item-desc">Poulet pané, dinde, cheddar, cornichon, laitue, sauce cocktail</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Zinger Plat</div><div class="item-desc">Poulet pané, dinde, cheddar, cornichon, laitue, sauce cocktail, frites</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Chili Bœuf Sandwich</div><div class="item-desc">Viande, oignon, poivron, maïs, fromages, frites, salade de choux, sauce crème d'ail</div></div><div class="item-price">1.500F – 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Chicken Burger</div><div class="item-desc">Viande chicken, laitue, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Hamburger</div><div class="item-desc">Viande hamburger, tomates, laitue, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Cheese Burger</div><div class="item-desc">Viande hamburger, laitue, cheese, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Double Hamburger</div><div class="item-desc">Double viande hamburger, laitue, tomates, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Double Cheese Burger</div><div class="item-desc">Viande hamburger, laitue, 2 cheeses, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">O'Big Hamburger</div><div class="item-desc">Viande hamburger, laitue, tomates, oignon, avocat, frites, sauce cocktail</div></div><div class="item-price">3.000F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sandwich à la Viande</div></div><div class="item-price">1.500F / 2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sandwich au Poulet</div></div><div class="item-price">1.500F / 2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sandwich Combo</div></div><div class="item-price">1.500F / 2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Crispy Sandwich</div><div class="item-desc">Poulet pané, salade de choux, cornichons, ketchup, frites</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Zinger Sandwich</div><div class="item-desc">Poulet pané, dinde, cheddar, cornichon, laitue, sauce cocktail</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Zinger Plat</div><div class="item-desc">Poulet pané, dinde, cheddar, cornichon, laitue, sauce cocktail, frites</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Chili Bœuf Sandwich</div><div class="item-desc">Viande, oignon, poivron, maïs, fromages, frites, salade de choux, sauce crème d'ail</div></div><div class="item-price">1.500F – 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Chicken Burger</div><div class="item-desc">Viande chicken, laitue, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Hamburger</div><div class="item-desc">Viande hamburger, tomates, laitue, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Cheese Burger</div><div class="item-desc">Viande hamburger, laitue, cheese, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Double Hamburger</div><div class="item-desc">Double viande hamburger, laitue, tomates, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Double Cheese Burger</div><div class="item-desc">Viande hamburger, laitue, 2 cheeses, tomates, oignons, sauce cocktail</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">O'Big Hamburger</div><div class="item-desc">Viande hamburger, laitue, tomates, oignon, avocat, frites, sauce cocktail</div></div><div class="item-price">3.000F</div></div></div>
+    </div>
   </section>
 
   <!-- PIZZAS -->
   <section class="section" id="pizzas">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=680&h=160&fit=crop&auto=format" alt="Pizzas" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🍕</div>
       <h2 class="section-title">Nos Pizzas</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Royale</div><div class="item-desc">Olive, champignon, jambon de bœuf, fromage</div></div><div class="item-price">5.000F / 7.500F<small>petite / grande</small></div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Mexicaine</div><div class="item-desc">Olive, champignon, viande hachée, fromage, crudité</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Polita</div><div class="item-desc">Olive, poulet, champignon, fromage, crudité</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Reine</div><div class="item-desc">Olive, champignon, fromage</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Royale Crémière</div><div class="item-desc">Crème fraîche, olive, champignon, fromage, jambon</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Végétarienne</div><div class="item-desc">Olive, champignon, sauce tomate, poivron, oignon, maïs</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza Margherita</div><div class="item-desc">Olive, champignon, tomate, fromage</div></div><div class="item-price">5.000F / 7.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pizza 4 Saisons</div><div class="item-desc">Viande hachée, jambon, poulet, crème</div></div><div class="item-price">5.000F / 7.500F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Royale</div><div class="item-desc">Olive, champignon, jambon de bœuf, fromage</div></div><div class="item-price">5.000F / 7.500F<small>petite / grande</small></div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Mexicaine</div><div class="item-desc">Olive, champignon, viande hachée, fromage, crudité</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Polita</div><div class="item-desc">Olive, poulet, champignon, fromage, crudité</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Reine</div><div class="item-desc">Olive, champignon, fromage</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Royale Crémière</div><div class="item-desc">Crème fraîche, olive, champignon, fromage, jambon</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Végétarienne</div><div class="item-desc">Olive, champignon, sauce tomate, poivron, oignon, maïs</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza Margherita</div><div class="item-desc">Olive, champignon, tomate, fromage</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pizza 4 Saisons</div><div class="item-desc">Viande hachée, jambon, poulet, crème</div></div><div class="item-price">5.000F / 7.500F</div></div></div>
+    </div>
   </section>
 
   <!-- PANINIS -->
   <section class="section" id="paninis">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1528735602780-2552fd46c7ba?w=680&h=160&fit=crop&auto=format" alt="Paninis" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🥖</div>
-      <h2 class="section-title">Nos Paninis & Subs</h2>
+      <h2 class="section-title">Paninis & Subs</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Panini Mariane</div><div class="item-desc">Jambon & fromages</div></div><div class="item-price">1.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Panini O'Big</div><div class="item-desc">Jambon, fromages & œufs</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Panini Poulet (Erujan)</div><div class="item-desc">Blanc de poulet, jambon & fromages</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Fajitas Poulet</div><div class="item-desc">Blanc de poulet, maïs doux, poivrons, oignons, champignons, fromages</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Steack Sub</div><div class="item-desc">Filet de bœuf, oignons, poivrons, champignons, fromages</div></div><div class="item-price">3.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Chicken Sub</div><div class="item-desc">Feuilles de laitue, tomates, maïs doux, fromages</div></div><div class="item-price">3.500F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Panini Mariane</div><div class="item-desc">Jambon & fromages</div></div><div class="item-price">1.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Panini O'Big</div><div class="item-desc">Jambon, fromages & œufs</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Panini Poulet (Erujan)</div><div class="item-desc">Blanc de poulet, jambon & fromages</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Fajitas Poulet</div><div class="item-desc">Blanc de poulet, maïs doux, poivrons, oignons, champignons, fromages</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Steack Sub</div><div class="item-desc">Filet de bœuf, oignons, poivrons, champignons, fromages</div></div><div class="item-price">3.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Chicken Sub</div><div class="item-desc">Feuilles de laitue, tomates, maïs doux, fromages</div></div><div class="item-price">3.500F</div></div></div>
+    </div>
   </section>
 
   <!-- GRILLADES -->
   <section class="section" id="grillades">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1544025162-d76538645f16?w=680&h=160&fit=crop&auto=format" alt="Grillades" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🔥</div>
       <h2 class="section-title">Nos Grillades</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Poulet Braisé ½</div></div><div class="item-price">3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Aileron Braisé</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Poisson Braisé</div></div><div class="item-price">5.000F / 7.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Brochette de Poulet</div></div><div class="item-price">3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Brochette de Bœuf</div></div><div class="item-price">3.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Brochette de Gésier</div></div><div class="item-price">1.500F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Poulet Braisé ½</div></div><div class="item-price">3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Aileron Braisé</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Poisson Braisé</div></div><div class="item-price">5.000F / 7.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Brochette de Poulet</div></div><div class="item-price">3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Brochette de Bœuf</div></div><div class="item-price">3.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Brochette de Gésier</div></div><div class="item-price">1.500F</div></div></div>
+    </div>
   </section>
 
   <!-- PÂTES & RIZ -->
   <section class="section" id="pates">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=680&h=160&fit=crop&auto=format" alt="Pâtes et Riz" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🍝</div>
       <h2 class="section-title">Pâtes, Riz & Couscous</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Œuf</div></div><div class="item-price">1.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Saucisse</div></div><div class="item-price">1.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Œuf + Saucisse</div></div><div class="item-price">1.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Œuf + Viande</div></div><div class="item-price">2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Œuf + Sardine</div></div><div class="item-price">1.000F / 2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti à l'Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti au Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Spaghetti Bolognaise</div></div><div class="item-price">3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Cuisse de Dindon</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pâte Rouge + Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pâte Rouge + Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pâte Rouge + Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Pâte Rouge + Cuisse de Dindon</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Couscous + Aileron</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Couscous + Poisson</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Couscous + Poulet</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Riz Blanc + Sauce Tomate au Poisson</div></div><div class="item-price">1.500F – 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Riz Gras / Créole Poisson ou Poulet</div></div><div class="item-price">3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Riz à l'Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Riz au Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Riz au Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Atassi / Wantché</div></div><div class="item-price">2.500F / 3.000F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Œuf</div></div><div class="item-price">1.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Saucisse</div></div><div class="item-price">1.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Œuf + Saucisse</div></div><div class="item-price">1.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Œuf + Viande</div></div><div class="item-price">2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Œuf + Sardine</div></div><div class="item-price">1.000F / 2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti à l'Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti au Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Spaghetti Bolognaise</div></div><div class="item-price">3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pilon + Jus de Tomate + Cuisse de Dindon</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pâte Rouge + Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pâte Rouge + Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pâte Rouge + Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Pâte Rouge + Cuisse de Dindon</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Couscous + Aileron</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Couscous + Poisson</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Couscous + Poulet</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Riz Blanc + Sauce Tomate au Poisson</div></div><div class="item-price">1.500F – 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Riz Gras / Créole Poisson ou Poulet</div></div><div class="item-price">3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Riz à l'Aileron</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Riz au Poulet</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Riz au Poisson</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Atassi / Wantché</div></div><div class="item-price">2.500F / 3.000F</div></div></div>
+    </div>
   </section>
 
   <!-- PLATS AFRICAINS -->
   <section class="section" id="africain">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1604329760661-cf9cc9ecf1b2?w=680&h=160&fit=crop&auto=format" alt="Plats Africains" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🍲</div>
       <h2 class="section-title">Plats Africains</h2>
     </div>
     <div class="section-divider"></div>
-
-    <div class="item"><div class="item-info"><div class="item-name">Croupillon / Cuisse de Dindon + Accompagnement</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Kom / Dokounou + Accompagnement</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Abolo + Accompagnement</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Haricot Blanc (Cassoulet)</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Légume / Sauce Feuille avec Accompagnement</div></div><div class="item-price">2.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Graine</div></div><div class="item-price">2.000F / 2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Arachide</div></div><div class="item-price">2.000F / 2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Kpala (Crincrin / Gombo)</div></div><div class="item-price">2.000F / 2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Kôpê</div></div><div class="item-price">2.000F / 2.500F / 3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Gbota (Sauce piquante, fricassé tête de mouton)</div></div><div class="item-price">2.000F – 3.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Blokoto (Sauce têtes de mouton et pattes de bœuf)</div></div><div class="item-price">2.500F / 3.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Gboman (Sauce légume, poisson ou viande, fromage)</div></div><div class="item-price">2.500F – 3.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Légume Composé</div></div><div class="item-price">2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Jus de Tomate + Akassa + Viande de Mouton</div></div><div class="item-price">3.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Asrokouin</div></div><div class="item-price">2.500F / 5.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Moyo au Poisson</div><div class="item-desc">Poisson au choix, sauce tomate</div></div><div class="item-price">3.000F / 6.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Moyo au Poulet</div><div class="item-desc">Chair ou bicyclette</div></div><div class="item-price">4.000F / 6.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Mouton</div><div class="item-desc">Viande de mouton, sauce tomate/arachide</div></div><div class="item-price">2.500F – 6.000F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Tomate (Poisson ou Mouton)</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Aubergine</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Gouagouassou</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Djoumgblé</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Sauce Claire à l'Ivoirienne</div></div><div class="item-price">2.000F / 2.500F</div></div>
-    <div class="item"><div class="item-info"><div class="item-name">Kedjenou de Poulet</div></div><div class="item-price">2.500F / 5.000F</div></div>
+    <div class="section-items">
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Croupillon / Cuisse de Dindon + Accompagnement</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Kom / Dokounou + Accompagnement</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Abolo + Accompagnement</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Haricot Blanc (Cassoulet)</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Légume / Sauce Feuille avec Accompagnement</div></div><div class="item-price">2.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Graine</div></div><div class="item-price">2.000F – 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Arachide</div></div><div class="item-price">2.000F – 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Kpala (Crincrin / Gombo)</div></div><div class="item-price">2.000F – 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Kôpê</div></div><div class="item-price">2.000F – 3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Gbota (Sauce piquante, fricassé tête de mouton)</div></div><div class="item-price">2.000F – 3.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Blokoto</div><div class="item-desc">Sauce têtes de mouton et pattes de bœuf</div></div><div class="item-price">2.500F / 3.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Gboman</div><div class="item-desc">Sauce légume, poisson ou viande, fromage, cézame</div></div><div class="item-price">2.500F – 3.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Légume Composé</div></div><div class="item-price">2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Jus de Tomate + Akassa + Viande de Mouton</div></div><div class="item-price">3.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Asrokouin</div></div><div class="item-price">2.500F / 5.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Moyo au Poisson</div><div class="item-desc">Poisson au choix, sauce tomate</div></div><div class="item-price">3.000F / 6.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Moyo au Poulet</div><div class="item-desc">Chair ou bicyclette</div></div><div class="item-price">4.000F / 6.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Mouton</div><div class="item-desc">Viande de mouton, sauce tomate/arachide</div></div><div class="item-price">2.500F – 6.000F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Tomate (Poisson ou Mouton)</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Aubergine</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Gouagouassou</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Djoumgblé</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Sauce Claire à l'Ivoirienne</div></div><div class="item-price">2.000F / 2.500F</div></div></div>
+      <div class="item"><div class="item-body"><div class="item-info"><div class="item-name">Kedjenou de Poulet</div></div><div class="item-price">2.500F / 5.000F</div></div></div>
+    </div>
   </section>
 
   <!-- ACCOMPAGNEMENTS -->
   <section class="section" id="accomp">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1516901408067-0343293f9028?w=680&h=160&fit=crop&auto=format" alt="Accompagnements" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🍚</div>
       <h2 class="section-title">Accompagnements</h2>
     </div>
     <div class="section-divider"></div>
     <div class="accomp-grid">
-      <span class="accomp-tag">Riz</span>
-      <span class="accomp-tag">Frites</span>
-      <span class="accomp-tag">Aloco</span>
-      <span class="accomp-tag">Pomme vapeur</span>
-      <span class="accomp-tag">Couscous</span>
-      <span class="accomp-tag">Piron</span>
-      <span class="accomp-tag">Akassa</span>
-      <span class="accomp-tag">Telibo</span>
-      <span class="accomp-tag">Jolof Rice</span>
-      <span class="accomp-tag">Atièkè</span>
-      <span class="accomp-tag">Pomme sautée</span>
-      <span class="accomp-tag">Manwè</span>
-      <span class="accomp-tag">Agbeli (Placali)</span>
-      <span class="accomp-tag">Pomme frite</span>
-      <span class="accomp-tag">Igname frite</span>
-      <span class="accomp-tag">Pâte rouge/noire/blanche</span>
-      <span class="accomp-tag">Haricot vert sauté</span>
+      <span class="accomp-tag">Riz</span><span class="accomp-tag">Frites</span><span class="accomp-tag">Aloco</span>
+      <span class="accomp-tag">Pomme vapeur</span><span class="accomp-tag">Couscous</span><span class="accomp-tag">Piron</span>
+      <span class="accomp-tag">Akassa</span><span class="accomp-tag">Telibo</span><span class="accomp-tag">Jolof Rice</span>
+      <span class="accomp-tag">Atièkè</span><span class="accomp-tag">Pomme sautée</span><span class="accomp-tag">Manwè</span>
+      <span class="accomp-tag">Agbeli (Placali)</span><span class="accomp-tag">Pomme frite</span><span class="accomp-tag">Igname frite</span>
+      <span class="accomp-tag">Pâte rouge/noire/blanche</span><span class="accomp-tag">Haricot vert sauté</span>
     </div>
     <p class="accomp-note">* Portion supplémentaire : 1.000F</p>
   </section>
 
   <!-- BOISSONS -->
   <section class="section" id="boissons">
+    <img class="section-banner" src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=680&h=160&fit=crop&auto=format" alt="Boissons" loading="lazy" />
     <div class="section-header">
       <div class="section-icon">🥤</div>
       <h2 class="section-title">Boissons</h2>
     </div>
     <div class="section-divider"></div>
-
     <div class="drinks-grid">
-      <div class="drink-card">
-        <div class="drink-name">🥤 Boissons fraîches</div>
-        <div class="drink-items">World Cola, Youki Orange, Youki Cocktail, Djino, Malta, Orangina, Youki Tonic</div>
-        <div class="drink-price">500F / 1.000F</div>
-      </div>
-      <div class="drink-card">
-        <div class="drink-name">⚡ Energy Drinks</div>
-        <div class="drink-items">Cody's Energy, Energy Malt, XXL, Valpierre</div>
-        <div class="drink-price">1.000F</div>
-      </div>
-      <div class="drink-card">
-        <div class="drink-name">🍺 Bières</div>
-        <div class="drink-items">Téquilla, Beaufort, Corona, Desperados, Guinness, Heineken, Budweiser, Chill, Ivoire…</div>
-        <div class="drink-price">500F – 1.500F</div>
-      </div>
-      <div class="drink-card">
-        <div class="drink-name">💧 Eaux minérales</div>
-        <div class="drink-items">Céleste, Awa, Akwabao, Éternelle, Kiréne, Olgane</div>
-        <div class="drink-price">500F</div>
-      </div>
-      <div class="drink-card">
-        <div class="drink-name">🍹 Jus naturels</div>
-        <div class="drink-items">Ananas, Bissap, Orange, Gingembre</div>
-        <div class="drink-price">1.000F</div>
-      </div>
-      <div class="drink-card">
-        <div class="drink-name">🧃 Jus importés</div>
-        <div class="drink-items">Ananas, Goyave, Mangue, Raisin, Pomme</div>
-        <div class="drink-price">500F / 1.000F</div>
-      </div>
-      <div class="drink-card" style="grid-column: span 2;">
-        <div class="drink-name">🍷 Vins</div>
-        <div class="drink-items">Bordeaux P. Sapin (3.000F) · Pavion de Pey Berlan (7.000F) · Hosman (7.000F) · Château Le Petit Courette (8.000F) · Château Le Verou (10.000F) · Château Bar Gentillot (12.000F) · Château Vernous (15.000F) · Château Grand Moulinet (25.000F)</div>
-      </div>
+      <div class="drink-card"><div class="drink-name">🥤 Boissons fraîches</div><div class="drink-items">World Cola, Youki Orange, Youki Cocktail, Djino, Malta, Orangina, Youki Tonic</div><div class="drink-price">500F / 1.000F</div></div>
+      <div class="drink-card"><div class="drink-name">⚡ Energy Drinks</div><div class="drink-items">Cody's Energy, Energy Malt, XXL, Valpierre</div><div class="drink-price">1.000F</div></div>
+      <div class="drink-card"><div class="drink-name">🍺 Bières</div><div class="drink-items">Téquilla, Beaufort, Corona, Desperados, Guinness, Heineken, Budweiser, Chill, Ivoire…</div><div class="drink-price">500F – 1.500F</div></div>
+      <div class="drink-card"><div class="drink-name">💧 Eaux minérales</div><div class="drink-items">Céleste, Awa, Akwabao, Éternelle, Kiréne, Olgane</div><div class="drink-price">500F</div></div>
+      <div class="drink-card"><div class="drink-name">🍹 Jus naturels</div><div class="drink-items">Ananas, Bissap, Orange, Gingembre</div><div class="drink-price">1.000F</div></div>
+      <div class="drink-card"><div class="drink-name">🧃 Jus importés</div><div class="drink-items">Ananas, Goyave, Mangue, Raisin, Pomme</div><div class="drink-price">500F / 1.000F</div></div>
+      <div class="drink-card" style="grid-column:span 2"><div class="drink-name">🍷 Vins</div><div class="drink-items">Bordeaux P. Sapin (3.000F) · Pavion de Pey Berlan (7.000F) · Hosman (7.000F) · Château Le Petit Courette (8.000F) · Château Le Verou (10.000F) · Château Bar Gentillot (12.000F) · Château Vernous (15.000F) · Château Grand Moulinet (25.000F)</div></div>
     </div>
+    <div style="height:16px"></div>
   </section>
 
 </main>
 
-<!-- BOUTON WHATSAPP FIXE -->
 <div class="wa-bar">
-  <a class="wa-btn" id="waBtn" href="#" target="_blank" rel="noopener">
-    <span class="wa-icon">💬</span>
-    Commander via WhatsApp
+  <a class="wa-btn" id="waBtn" href="https://wa.me/2250708903332?text=Bonjour%20O'big%20Food%20!%20Je%20souhaite%20passer%20une%20commande%20%F0%9F%99%82" target="_blank" rel="noopener">
+    <span>💬</span> Commander via WhatsApp
   </a>
 </div>
 
 <script>
-  // ── Remplace ce numéro par le vrai numéro WhatsApp du restaurant ──
-  const WA_NUMBER = '2250708903332';
-
-  document.getElementById('waBtn').href =
-    `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent("Bonjour O'big Food ! Je souhaite passer une commande 🙂")}`;
-
   // Navigation catégories
-  function goTo(id, btn) {
-    document.getElementById(id).scrollIntoView({ behavior: 'smooth', block: 'start' });
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.target;
+      document.getElementById(target).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 
   // Highlight nav au scroll
   const sections = document.querySelectorAll('section[id]');
   const catBtns = document.querySelectorAll('.cat-btn');
-  const navHeight = document.querySelector('.cat-nav').offsetHeight + 60;
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
-        catBtns.forEach(btn => {
-          btn.classList.toggle('active', btn.getAttribute('onclick')?.includes(`'${id}'`) ?? false);
-        });
+        catBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.target === id));
       }
     });
-  }, { rootMargin: `-${navHeight}px 0px -60% 0px` });
-
+  }, { rootMargin: '-80px 0px -60% 0px' });
   sections.forEach(s => observer.observe(s));
 
   // Recherche
-  function filterMenu(query) {
-    const q = query.toLowerCase().trim();
-    const items = document.querySelectorAll('.item');
-    const sections = document.querySelectorAll('.section');
+  const searchInput = document.getElementById('search');
+  const noResult = document.getElementById('noResult');
+  const allItems = document.querySelectorAll('.item');
+  const allSections = document.querySelectorAll('.section');
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.toLowerCase().trim();
 
     if (!q) {
-      items.forEach(i => i.style.display = '');
-      sections.forEach(s => s.style.display = '');
-      document.querySelector('.no-result')?.remove();
+      allItems.forEach(i => i.style.display = '');
+      allSections.forEach(s => s.style.display = '');
+      noResult.classList.remove('visible');
       return;
     }
 
     let found = 0;
-    items.forEach(item => {
-      const text = item.textContent.toLowerCase();
-      item.style.display = text.includes(q) ? '' : 'none';
-      if (text.includes(q)) found++;
+    allItems.forEach(item => {
+      const match = item.textContent.toLowerCase().includes(q);
+      item.style.display = match ? '' : 'none';
+      if (match) found++;
     });
 
-    // Cacher sections vides
-    sections.forEach(section => {
-      const visible = [...section.querySelectorAll('.item')].some(i => i.style.display !== 'none');
-      section.style.display = visible ? '' : 'none';
+    allSections.forEach(section => {
+      const hasVisible = [...section.querySelectorAll('.item')].some(i => i.style.display !== 'none');
+      section.style.display = hasVisible ? '' : 'none';
     });
 
-    document.querySelector('.no-result')?.remove();
-    if (found === 0) {
-      const div = document.createElement('div');
-      div.className = 'no-result';
-      div.textContent = `Aucun plat trouvé pour "${query}"`;
-      document.getElementById('menuMain').prepend(div);
-    }
-  }
+    noResult.classList.toggle('visible', found === 0);
+  });
 </script>
 </body>
 </html>
