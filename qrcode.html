@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>QR Code — O'big Food</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', serif;
+      background: #f5f0e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+    }
+    .badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4a017;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 38px;
+      font-weight: 900;
+      color: #2d6a4f;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    h1 span { color: #d4a017; }
+    .sub {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 28px;
+    }
+    .qr-wrap {
+      background: #f9f9f9;
+      border-radius: 16px;
+      padding: 20px;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+    canvas { display: block; }
+    .instruction {
+      font-size: 14px;
+      color: #444;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    .instruction strong { color: #2d6a4f; }
+    .url {
+      font-size: 11px;
+      color: #aaa;
+      word-break: break-all;
+    }
+    .divider {
+      height: 1px;
+      background: #eee;
+      margin: 20px 0;
+    }
+    .print-btn {
+      background: #2d6a4f;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 12px 28px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 16px;
+    }
+    .print-btn:hover { background: #40916c; }
+    @media print {
+      body { background: white; }
+      .print-btn { display: none; }
+      .card { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">African Food & Drink</div>
+    <h1>O'<span>big</span></h1>
+    <div class="sub">Scannez pour voir notre menu</div>
+    <div class="qr-wrap">
+      <canvas id="qr"></canvas>
+    </div>
+    <p class="instruction">
+      📱 <strong>Scannez avec votre téléphone</strong><br>
+      Accédez à notre carte complète instantanément
+    </p>
+    <div class="divider"></div>
+    <p class="url">obig-menu.dertys01.workers.dev</p>
+    <br>
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimer ce QR code</button>
+  </div>
+
+  <script>
+    QRCode.toCanvas(document.getElementById('qr'), 'https://obig-menu.dertys01.workers.dev', {
+      width: 220,
+      margin: 1,
+      color: { dark: '#2d6a4f', light: '#f9f9f9' }
+    });
+  </script>
+</body>
+</html>
