@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>QR Code — O'big Food</title>
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -97,7 +96,7 @@
     <h1>O'<span>big</span></h1>
     <div class="sub">Scannez pour voir notre menu</div>
     <div class="qr-wrap">
-      <canvas id="qr"></canvas>
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&color=2d6a4f&data=https://obig-menu.dertys01.workers.dev" width="220" height="220" alt="QR Code Menu O'big Food" />
     </div>
     <p class="instruction">
       📱 <strong>Scannez avec votre téléphone</strong><br>
@@ -109,12 +108,5 @@
     <button class="print-btn" onclick="window.print()">🖨️ Imprimer ce QR code</button>
   </div>
 
-  <script>
-    QRCode.toCanvas(document.getElementById('qr'), 'https://obig-menu.dertys01.workers.dev', {
-      width: 220,
-      margin: 1,
-      color: { dark: '#2d6a4f', light: '#f9f9f9' }
-    });
-  </script>
 </body>
 </html>
