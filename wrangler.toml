@@ -1,3 +1,11 @@
 name = "obig-menu"
 compatibility_date = "2025-01-01"
-assets = { directory = "." }
+main = "worker.js"
+assets = { directory = ".", binding = "ASSETS" }
+
+[[kv_namespaces]]
+binding = "MENU_KV"
+id = "b33d89b362324baf89542be94a608640"
+
+[vars]
+ADMIN_KEY = "obigfood2025"

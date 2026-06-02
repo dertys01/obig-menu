@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — O'big Food</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green: #2d6a4f; --green-light: #40916c; --gold: #d4a017;
+      --bg: #f2e8d5; --card: #ffffff; --border: #e8e4dc;
+      --muted: #6b6b6b; --radius: 12px; --danger: #e53e3e;
+    }
+    body { font-family: 'Poppins', sans-serif; background: var(--bg); min-height: 100vh; }
+
+    /* LOGIN */
+    .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .login-card { background: white; border-radius: 20px; padding: 36px 32px; width: 100%; max-width: 360px; box-shadow: 0 8px 40px rgba(0,0,0,0.1); text-align: center; }
+    .login-logo { font-size: 32px; font-weight: 800; color: var(--green); margin-bottom: 4px; }
+    .login-logo span { color: var(--gold); }
+    .login-sub { font-size: 12px; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; }
+    .login-input { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; font-family: 'Poppins', sans-serif; outline: none; margin-bottom: 12px; }
+    .login-input:focus { border-color: var(--green); }
+    .login-btn { width: 100%; background: var(--green); color: white; border: none; border-radius: 10px; padding: 13px; font-size: 14px; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; }
+    .login-btn:hover { background: var(--green-light); }
+    .login-error { color: var(--danger); font-size: 12px; margin-top: 8px; display: none; }
+
+    /* ADMIN */
+    .admin-wrap { display: none; max-width: 800px; margin: 0 auto; padding: 20px 16px 80px; }
+    .admin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .admin-title { font-size: 20px; font-weight: 700; color: var(--green); }
+    .admin-title span { color: var(--gold); }
+    .view-menu-btn { font-size: 12px; color: var(--green); text-decoration: none; font-weight: 600; }
+
+    /* TABS */
+    .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; margin-bottom: 16px; background: white; border-radius: 14px; padding: 6px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab-btn { flex-shrink: 0; padding: 8px 14px; font-size: 12px; font-weight: 600; color: var(--muted); background: none; border: none; border-radius: 10px; cursor: pointer; font-family: 'Poppins', sans-serif; white-space: nowrap; transition: all 0.15s; }
+    .tab-btn.active { background: var(--green); color: white; }
+
+    /* PANEL */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ITEM ROW */
+    .item-row { background: white; border-radius: var(--radius); padding: 14px; margin-bottom: 10px; border-left: 4px solid var(--green); box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
+    .item-row-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .item-row-fields.three { grid-template-columns: 2fr 2fr 1fr; }
+    .field-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .field-input { width: 100%; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'Poppins', sans-serif; outline: none; transition: border-color 0.15s; }
+    .field-input:focus { border-color: var(--green); }
+    .item-actions { display: flex; justify-content: flex-end; margin-top: 8px; }
+    .del-btn { background: none; border: none; color: #ccc; font-size: 18px; cursor: pointer; padding: 2px 4px; transition: color 0.15s; }
+    .del-btn:hover { color: var(--danger); }
+
+    /* ADD ITEM */
+    .add-item-btn { display: flex; align-items: center; gap: 8px; background: none; border: 2px dashed #c8e6d8; border-radius: var(--radius); padding: 12px 16px; width: 100%; color: var(--green); font-size: 13px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; margin-top: 6px; transition: background 0.15s; }
+    .add-item-btn:hover { background: #f0f7f4; }
+
+    /* TAGS PANEL */
+    .tags-wrap { background: white; border-radius: var(--radius); padding: 16px; box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
+    .tags-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+    .tag-chip { display: flex; align-items: center; gap: 6px; background: #f0f7f4; border: 1px solid #c8e6d8; border-radius: 20px; padding: 5px 10px 5px 14px; font-size: 12px; color: var(--green); font-weight: 600; }
+    .tag-remove { background: none; border: none; color: #aaa; cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+    .tag-remove:hover { color: var(--danger); }
+    .tag-add-row { display: flex; gap: 8px; }
+    .tag-add-row input { flex: 1; padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'Poppins', sans-serif; outline: none; }
+    .tag-add-row input:focus { border-color: var(--green); }
+    .tag-add-row button { background: var(--green); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600; font-family: 'Poppins', sans-serif; cursor: pointer; }
+
+    /* SAVE BAR */
+    .save-bar { position: fixed; bottom: 0; left: 0; right: 0; background: white; border-top: 1px solid var(--border); padding: 12px 16px; display: flex; gap: 10px; align-items: center; justify-content: flex-end; }
+    .status-msg { flex: 1; font-size: 13px; color: var(--muted); }
+    .status-msg.ok { color: var(--green); }
+    .status-msg.err { color: var(--danger); }
+    .save-btn { background: var(--green); color: white; border: none; border-radius: 10px; padding: 11px 28px; font-size: 14px; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; transition: background 0.15s; }
+    .save-btn:hover { background: var(--green-light); }
+    .save-btn:disabled { opacity: 0.6; cursor: default; }
+
+    @media (max-width: 500px) {
+      .item-row-fields.three { grid-template-columns: 1fr 1fr; }
+      .item-row-fields.three .field-desc { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <div class="login-logo">O'<span>big</span></div>
+    <div class="login-sub">Administration du menu</div>
+    <input class="login-input" type="password" id="loginInput" placeholder="Mot de passe admin" />
+    <button class="login-btn" id="loginBtn">Accéder</button>
+    <div class="login-error" id="loginError">Mot de passe incorrect.</div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div class="admin-wrap" id="adminWrap">
+  <div class="admin-header">
+    <div class="admin-title">O'<span>big</span> Admin</div>
+    <a class="view-menu-btn" href="/" target="_blank">← Voir le menu</a>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="panels"></div>
+
+  <div class="save-bar">
+    <span class="status-msg" id="statusMsg"></span>
+    <button class="save-btn" id="saveBtn">Enregistrer</button>
+  </div>
+</div>
+
+<script>
+let menuData = null;
+let adminKey = '';
+let activeTab = 0;
+
+// ─── LOGIN ─────────────────────────────────────────────────────────────────────
+
+async function tryLogin() {
+  const key = document.getElementById('loginInput').value.trim();
+  if (!key) return;
+  // Validate by trying a GET (any key works for GET; we'll verify on save)
+  // Actually test with a dummy POST to check key
+  const r = await fetch('/api/admin/save', {
+    method: 'POST',
+    headers: { 'X-Admin-Key': key, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ _check: true }),
+  });
+  if (r.status === 401) {
+    document.getElementById('loginError').style.display = 'block';
+    return;
+  }
+  adminKey = key;
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('adminWrap').style.display = 'block';
+  loadMenu();
+}
+
+document.getElementById('loginBtn').addEventListener('click', tryLogin);
+document.getElementById('loginInput').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+// ─── LOAD ──────────────────────────────────────────────────────────────────────
+
+async function loadMenu() {
+  const r = await fetch('/api/menu');
+  menuData = await r.json();
+  if (!menuData.categories || menuData.categories.length === 0) {
+    const r2 = await fetch('/menu.json');
+    menuData = await r2.json();
+  }
+  renderTabs();
+  renderPanel(0);
+}
+
+// ─── TABS ──────────────────────────────────────────────────────────────────────
+
+function renderTabs() {
+  const tabs = document.getElementById('tabs');
+  tabs.innerHTML = '';
+  menuData.categories.forEach((cat, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn' + (idx === 0 ? ' active' : '');
+    btn.textContent = cat.emoji + ' ' + cat.name.replace('Nos ', '');
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderPanel(idx);
+      activeTab = idx;
+    });
+    tabs.appendChild(btn);
+  });
+}
+
+// ─── PANELS ────────────────────────────────────────────────────────────────────
+
+function renderPanel(idx) {
+  const cat = menuData.categories[idx];
+  const panels = document.getElementById('panels');
+  panels.innerHTML = '';
+
+  if (cat.type === 'items') {
+    renderItemsPanel(cat, panels);
+  } else if (cat.type === 'tags') {
+    renderTagsPanel(cat, panels);
+  } else if (cat.type === 'drinks') {
+    renderDrinksPanel(cat, panels);
+  }
+}
+
+function renderItemsPanel(cat, container) {
+  cat.items.forEach((item, i) => {
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.innerHTML = `
+      <div class="item-row-fields three">
+        <div>
+          <div class="field-label">Nom</div>
+          <input class="field-input" data-field="name" data-idx="${i}" value="${esc(item.name)}" placeholder="Nom du plat" />
+        </div>
+        <div class="field-desc">
+          <div class="field-label">Description</div>
+          <input class="field-input" data-field="desc" data-idx="${i}" value="${esc(item.desc || '')}" placeholder="Ingrédients..." />
+        </div>
+        <div>
+          <div class="field-label">Prix</div>
+          <input class="field-input" data-field="price" data-idx="${i}" value="${esc(item.price)}" placeholder="2.500F" />
+        </div>
+      </div>
+      <div class="item-actions">
+        <button class="del-btn" title="Supprimer" data-idx="${i}">🗑</button>
+      </div>`;
+    row.querySelectorAll('.field-input').forEach(input => {
+      input.addEventListener('input', () => {
+        cat.items[parseInt(input.dataset.idx)][input.dataset.field] = input.value;
+      });
+    });
+    row.querySelector('.del-btn').addEventListener('click', e => {
+      const idx = parseInt(e.currentTarget.dataset.idx);
+      cat.items.splice(idx, 1);
+      renderPanel(activeTab);
+    });
+    container.appendChild(row);
+  });
+
+  const addBtn = document.createElement('button');
+  addBtn.className = 'add-item-btn';
+  addBtn.innerHTML = '+ Ajouter un plat';
+  addBtn.addEventListener('click', () => {
+    cat.items.push({ name: '', desc: '', price: '' });
+    renderPanel(activeTab);
+    // Scroll to bottom
+    setTimeout(() => container.lastElementChild?.previousElementSibling?.scrollIntoView({ behavior: 'smooth' }), 50);
+  });
+  container.appendChild(addBtn);
+}
+
+function renderTagsPanel(cat, container) {
+  const wrap = document.createElement('div');
+  wrap.className = 'tags-wrap';
+
+  const refreshTags = () => {
+    const list = wrap.querySelector('.tags-list');
+    list.innerHTML = cat.tags.map((tag, i) => `
+      <span class="tag-chip">${tag}
+        <button class="tag-remove" data-i="${i}" title="Supprimer">×</button>
+      </span>`).join('');
+    list.querySelectorAll('.tag-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        cat.tags.splice(parseInt(btn.dataset.i), 1);
+        refreshTags();
+      });
+    });
+  };
+
+  wrap.innerHTML = `
+    <div class="field-label" style="margin-bottom:10px">Accompagnements</div>
+    <div class="tags-list"></div>
+    <div class="tag-add-row">
+      <input id="tagInput" placeholder="Nouvel accompagnement..." />
+      <button id="tagAddBtn">Ajouter</button>
+    </div>`;
+
+  refreshTags();
+
+  wrap.querySelector('#tagAddBtn').addEventListener('click', () => {
+    const input = wrap.querySelector('#tagInput');
+    const val = input.value.trim();
+    if (val) { cat.tags.push(val); input.value = ''; refreshTags(); }
+  });
+  wrap.querySelector('#tagInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') wrap.querySelector('#tagAddBtn').click();
+  });
+
+  container.appendChild(wrap);
+}
+
+function renderDrinksPanel(cat, container) {
+  cat.drinks.forEach((drink, i) => {
+    const row = document.createElement('div');
+    row.className = 'item-row';
+    row.innerHTML = `
+      <div class="item-row-fields">
+        <div>
+          <div class="field-label">Nom</div>
+          <input class="field-input" data-field="name" data-idx="${i}" value="${esc(drink.name)}" />
+        </div>
+        <div>
+          <div class="field-label">Prix</div>
+          <input class="field-input" data-field="price" data-idx="${i}" value="${esc(drink.price || '')}" placeholder="500F / 1.000F" />
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <div class="field-label">Détail</div>
+        <input class="field-input" data-field="items" data-idx="${i}" value="${esc(drink.items)}" />
+      </div>
+      <div class="item-actions">
+        <button class="del-btn" title="Supprimer" data-idx="${i}">🗑</button>
+      </div>`;
+    row.querySelectorAll('.field-input').forEach(input => {
+      input.addEventListener('input', () => {
+        cat.drinks[parseInt(input.dataset.idx)][input.dataset.field] = input.value;
+      });
+    });
+    row.querySelector('.del-btn').addEventListener('click', e => {
+      cat.drinks.splice(parseInt(e.currentTarget.dataset.idx), 1);
+      renderPanel(activeTab);
+    });
+    container.appendChild(row);
+  });
+}
+
+// ─── SAVE ──────────────────────────────────────────────────────────────────────
+
+document.getElementById('saveBtn').addEventListener('click', async () => {
+  const btn = document.getElementById('saveBtn');
+  const msg = document.getElementById('statusMsg');
+  btn.disabled = true;
+  btn.textContent = 'Enregistrement...';
+  msg.className = 'status-msg';
+  msg.textContent = '';
+
+  try {
+    const r = await fetch('/api/admin/save', {
+      method: 'POST',
+      headers: { 'X-Admin-Key': adminKey, 'Content-Type': 'application/json' },
+      body: JSON.stringify(menuData),
+    });
+    if (r.ok) {
+      msg.className = 'status-msg ok';
+      msg.textContent = '✓ Menu enregistré avec succès !';
+    } else {
+      throw new Error('HTTP ' + r.status);
+    }
+  } catch (e) {
+    msg.className = 'status-msg err';
+    msg.textContent = '✗ Erreur : ' + e.message;
+  }
+
+  btn.disabled = false;
+  btn.textContent = 'Enregistrer';
+  setTimeout(() => { msg.textContent = ''; }, 4000);
+});
+
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+</script>
+</body>
+</html>

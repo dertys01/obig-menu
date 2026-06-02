@@ -1,0 +1,228 @@
+{
+  "categories": [
+    {
+      "id": "salades",
+      "emoji": "🥗",
+      "name": "Nos Salades",
+      "image": "salades.jpg",
+      "imageStyle": "object-position: center center;",
+      "type": "items",
+      "items": [
+        { "name": "Big Classic", "desc": "Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, viande hachée", "price": "2.100F" },
+        { "name": "Big Poulet Plancha", "desc": "Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, poulet plancha", "price": "3.100F" },
+        { "name": "Big Boulettes de Bœuf", "desc": "Laitue, pomme de terre, carotte, concombre, maïs doux, œuf dur, boulette de bœuf", "price": "2.600F" },
+        { "name": "Big Boulettes de Poisson", "desc": "Laitue, pomme de terre, carotte, betterave, petit pois, maïs doux, boulette de poisson", "price": "2.100F" },
+        { "name": "Big Jambon Mozzarella", "desc": "Laitue, pomme de terre, carotte, concombre, tomate, olives noires, jambon de volaille, mozzarella", "price": "2.600F" },
+        { "name": "Big Niçoise", "desc": "Laitue, pomme de terre, haricot vert, tomate, olives noires, œuf dur, thon", "price": "2.600F" },
+        { "name": "Big Niçoise Revisitée", "desc": "Laitue, pomme de terre, concombre, tomate, maïs doux, œuf dur, thon", "price": "2.600F" },
+        { "name": "Big Avocat Crevette", "desc": "Laitue, pomme de terre, concombre, tomate, olives noires, avocat, crevettes", "price": "3.600F" },
+        { "name": "Salade du Chef", "desc": "Laitue, tomate, poivron, émincé de poulet, olives noires, carotte, thon", "price": "3.600F" }
+      ]
+    },
+    {
+      "id": "sandwichs",
+      "emoji": "🥪",
+      "name": "Nos Sandwichs",
+      "image": "sandwichs.jpg",
+      "imageStyle": "object-position: center 70%;",
+      "type": "items",
+      "items": [
+        { "name": "Sandwich à la Viande", "desc": "", "price": "1.500F / 2.000F" },
+        { "name": "Sandwich au Poulet", "desc": "", "price": "1.500F / 2.000F" },
+        { "name": "Sandwich Combo", "desc": "", "price": "1.500F / 2.000F" },
+        { "name": "Crispy Sandwich", "desc": "Poulet pané, salade de choux, cornichons, ketchup, frites", "price": "2.000F" },
+        { "name": "Zinger Sandwich", "desc": "Poulet pané, dinde, cheddar Mazabela, cornichon, laitue, sauce cocktail", "price": "3.000F" },
+        { "name": "Zinger Plat", "desc": "Poulet pané, dinde, cheddar Mazabela, cornichon, laitue, sauce cocktail, frites", "price": "3.000F" },
+        { "name": "Chili Bœuf Sandwich", "desc": "Viande, oignon, poivron, maïs, fromages, champignons", "price": "2.500F" },
+        { "name": "Chili Bœuf Plat", "desc": "Viande, oignon, poivron, maïs, fromages, champignons, frites", "price": "2.000F / 3.000F" },
+        { "name": "Fajita Sandwich", "desc": "Blanc de poulet, poivron, champignons, oignon, maïs, fromages, sauce", "price": "1.500F / 2.500F" },
+        { "name": "Fajita Plat", "desc": "Blanc de poulet, poivron, champignons, oignon, maïs, fromages, sauce, frites", "price": "2.000F / 3.000F" },
+        { "name": "Taouk Sandwich (Blanc de Poulet)", "desc": "Blanc de poulet, sauce d'ail, frites, cornichons", "price": "1.500F" },
+        { "name": "Taouk Plat (Blanc de Poulet)", "desc": "Blanc de poulet, sauce d'ail, frites, cornichons", "price": "1.500F / 2.000F" },
+        { "name": "Filet Steak Sandwich", "desc": "Viande, poivron, champignons, oignons, fromages, sauce soya", "price": "1.500F / 2.500F" },
+        { "name": "Sandwich Poulet Crispy Assiette", "desc": "Blanc de poulet, frites, salade de choux, sauce crème d'ail", "price": "2.500F / 3.000F" }
+      ]
+    },
+    {
+      "id": "chawarmas",
+      "emoji": "🌯",
+      "name": "Nos Chawarmas",
+      "image": "chawarma.jpg",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Chawarma Viande", "desc": "Filet de bœuf, frites, persil, oignon, tomate, laitue, sauce blanche", "price": "1.500F / 2.000F / 2.500F" },
+        { "name": "Chawarma Poulet", "desc": "Poulet kebab, frites, feuilles de laitue, choux, sauce cocktail", "price": "1.500F / 2.000F / 2.500F" },
+        { "name": "Chawarma Poisson", "desc": "Filet de poisson, frites, feuilles de laitue, crème d'ail", "price": "1.500F / 2.000F / 2.500F" },
+        { "name": "Chawarma Cheese Viande", "desc": "Filet de bœuf, frites, tomates, laitue, cheese, oignon, persil, sauce blanche", "price": "1.500F / 2.000F / 2.500F" },
+        { "name": "Chawarma Cheese Poulet", "desc": "Poulet kebab, frites, choux, feuilles de laitue, cheese, sauce cocktail", "price": "1.500F / 2.000F / 2.500F" }
+      ]
+    },
+    {
+      "id": "burgers",
+      "emoji": "🍔",
+      "name": "Nos Burgers",
+      "image": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Chicken Burger", "desc": "Viande chicken, feuilles de laitue, tomates, oignons, sauce cocktail", "price": "2.000F / 2.500F" },
+        { "name": "Hamburger", "desc": "Viande hamburger, tomates, feuilles de laitue, oignons, sauce cocktail", "price": "2.000F / 2.500F" },
+        { "name": "Cheese Burger", "desc": "Viande hamburger, laitue, cheese, tomates, oignons, sauce cocktail", "price": "2.000F / 2.500F" },
+        { "name": "Double Hamburger", "desc": "Double viande hamburger, laitue, tomates, sauce cocktail", "price": "2.000F / 2.500F" },
+        { "name": "Double Cheese Burger", "desc": "Viande hamburger, laitue, 2 cheeses, tomates, oignons, sauce cocktail", "price": "2.000F / 2.500F" },
+        { "name": "O'Big Hamburger", "desc": "Viande hamburger, laitue, tomates, oignon, avocat, frites, sauce cocktail", "price": "3.000F" }
+      ]
+    },
+    {
+      "id": "pizzas",
+      "emoji": "🍕",
+      "name": "Nos Pizzas",
+      "image": "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Pizza Royale", "desc": "Olive, champignon, jambon de bœuf, fromage", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Mexicaine", "desc": "Olive, champignon, viande hachée, fromage, crudité", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Polita", "desc": "Olive, poulet, champignon, fromage, crudité", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Reine", "desc": "Olive, champignon, fromage", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Royale Crémière", "desc": "Crème fraîche, olive, champignon, fromage, jambon", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Végétarienne", "desc": "Olive, champignon, sauce tomate, poivron, oignon, maïs", "price": "5.000F / 7.500F" },
+        { "name": "Pizza Margherita", "desc": "Olive, champignon, tomate, fromage", "price": "5.000F / 7.500F" },
+        { "name": "Pizza 4 Saisons", "desc": "Viande hachée, jambon, poulet, crème", "price": "5.000F / 7.500F" }
+      ]
+    },
+    {
+      "id": "paninis",
+      "emoji": "🥖",
+      "name": "Nos Paninis",
+      "image": "https://images.unsplash.com/photo-1509722747041-616f39b57569?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Panini Mariane", "desc": "Jambon & fromages", "price": "1.500F" },
+        { "name": "Panini O'Big", "desc": "Jambon, fromages & œufs", "price": "2.500F" },
+        { "name": "Panini Poulet (Erujan)", "desc": "Blanc de poulet, jambon & fromages", "price": "2.500F" },
+        { "name": "Fajitas Poulet", "desc": "Blanc de poulet, maïs doux, poivrons, oignons, champignons, fromages", "price": "2.000F / 2.500F" },
+        { "name": "Steack Sub", "desc": "Filet de bœuf, oignons, poivrons, champignons, fromages", "price": "3.500F" },
+        { "name": "Chicken Sub", "desc": "Feuilles de laitue, tomates, maïs doux, fromages", "price": "3.500F" }
+      ]
+    },
+    {
+      "id": "grillades",
+      "emoji": "🔥",
+      "name": "Nos Grillades",
+      "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Poulet Braisé ½", "desc": "", "price": "3.000F" },
+        { "name": "Aileron Braisé", "desc": "", "price": "2.500F" },
+        { "name": "Poisson Braisé", "desc": "", "price": "5.000F / 7.000F" },
+        { "name": "Brochette de Poulet", "desc": "", "price": "3.000F" },
+        { "name": "Brochette de Bœuf", "desc": "", "price": "3.500F" },
+        { "name": "Brochette de Gésier", "desc": "", "price": "1.500F" }
+      ]
+    },
+    {
+      "id": "pates",
+      "emoji": "🍝",
+      "name": "Pâtes, Riz & Couscous",
+      "image": "spaquetti.jpg",
+      "imageStyle": "object-position: center 80%;",
+      "type": "items",
+      "items": [
+        { "name": "Spaghetti Œuf", "desc": "", "price": "1.000F" },
+        { "name": "Spaghetti Saucisse", "desc": "", "price": "1.000F" },
+        { "name": "Spaghetti Œuf + Saucisse", "desc": "", "price": "1.500F" },
+        { "name": "Spaghetti Œuf + Viande", "desc": "", "price": "2.000F" },
+        { "name": "Spaghetti Œuf + Sardine", "desc": "", "price": "1.000F / 2.000F" },
+        { "name": "Spaghetti à l'Aileron", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Spaghetti au Poulet", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Spaghetti Bolognaise", "desc": "", "price": "3.000F" },
+        { "name": "Pilon + Jus de Tomate + Aileron", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pilon + Jus de Tomate + Poisson", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pilon + Jus de Tomate + Cuisse de Dindon", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pâte Rouge + Aileron", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pâte Rouge + Poisson", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pâte Rouge + Poulet", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Pâte Rouge + Cuisse de Dindon", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Couscous + Aileron", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Couscous + Poisson", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Couscous + Poulet", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Riz Blanc + Sauce Tomate au Poisson", "desc": "", "price": "1.500F – 3.000F" },
+        { "name": "Riz Gras / Créole Poisson ou Poulet", "desc": "", "price": "3.000F" },
+        { "name": "Riz à l'Aileron", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Riz au Poulet", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Riz au Poisson", "desc": "", "price": "2.500F / 3.000F" },
+        { "name": "Atassi / Wantché", "desc": "", "price": "2.500F / 3.000F" }
+      ]
+    },
+    {
+      "id": "africain",
+      "emoji": "🍲",
+      "name": "Plats Africains",
+      "image": "platafricain.jpg",
+      "imageStyle": "",
+      "type": "items",
+      "items": [
+        { "name": "Croupillon / Cuisse de Dindon + Accompagnement", "desc": "", "price": "2.500F" },
+        { "name": "Kom / Dokounou + Accompagnement", "desc": "", "price": "2.500F" },
+        { "name": "Abolo + Accompagnement", "desc": "", "price": "2.500F" },
+        { "name": "Haricot Blanc (Cassoulet)", "desc": "", "price": "2.500F" },
+        { "name": "Légume / Sauce Feuille avec Accompagnement", "desc": "", "price": "2.000F" },
+        { "name": "Sauce Graine", "desc": "", "price": "2.000F / 2.500F / 3.000F" },
+        { "name": "Sauce Arachide", "desc": "", "price": "2.000F / 2.500F / 3.000F" },
+        { "name": "Sauce Kpala (Crincrin / Gombo)", "desc": "", "price": "2.500F / 3.000F / 3.500F" },
+        { "name": "Sauce Kôpê", "desc": "", "price": "2.500F / 3.000F / 3.500F" },
+        { "name": "Gbota", "desc": "Sauce piquante, fricassé de tête de mouton", "price": "2.500F / 3.500F" },
+        { "name": "Blokoto", "desc": "Sauce têtes de mouton et pattes de bœuf", "price": "2.500F / 3.500F" },
+        { "name": "Gboman", "desc": "Sauce légume, poisson ou viande, fromage, cézame", "price": "2.500F / 3.000F / 3.500F" },
+        { "name": "Légume Composé", "desc": "", "price": "2.500F" },
+        { "name": "Jus de Tomate + Akassa + Viande de Mouton", "desc": "", "price": "3.000F" },
+        { "name": "Sauce Asrokouin", "desc": "", "price": "2.500F / 5.000F" },
+        { "name": "Moyo au Poisson", "desc": "Poisson au choix, sauce tomate", "price": "3.000F / 6.000F" },
+        { "name": "Moyo au Poulet", "desc": "Chair ou bicyclette", "price": "4.000F / 6.000F" },
+        { "name": "Sauce Mouton", "desc": "Viande de mouton, sauce tomate / arachide", "price": "2.500F / 3.000F / 6.000F" },
+        { "name": "Sauce Tomate (Poisson ou Mouton)", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Sauce Aubergine", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Sauce Gouagouassou", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Sauce Djoumgblé", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Sauce Claire à l'Ivoirienne", "desc": "", "price": "2.000F / 2.500F" },
+        { "name": "Kedjenou de Poulet", "desc": "", "price": "2.500F / 5.000F" }
+      ]
+    },
+    {
+      "id": "accomp",
+      "emoji": "🍚",
+      "name": "Accompagnements",
+      "image": "https://images.unsplash.com/photo-1516901408067-0343293f9028?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "tags",
+      "tags": [
+        "Riz", "Frites", "Aloco", "Pomme vapeur", "Couscous", "Piron",
+        "Akassa", "Telibo", "Jolof Rice", "Atièkè", "Pomme sautée", "Manwè",
+        "Agbeli (Placali)", "Pomme frite", "Igname frite",
+        "Pâte rouge / noire / blanche", "Haricot vert sauté"
+      ],
+      "note": "* Portion supplémentaire : 1.000F"
+    },
+    {
+      "id": "boissons",
+      "emoji": "🥤",
+      "name": "Boissons",
+      "image": "https://images.unsplash.com/photo-1544145945-f90425340c7e?auto=format&fit=crop&w=800&h=250&q=80",
+      "imageStyle": "",
+      "type": "drinks",
+      "drinks": [
+        { "name": "🥤 Boissons fraîches", "items": "World Cola, Youki Orange, Youki Cocktail, Djino, Malta, Youki Moka Café, Youzou Tonic, Orangina, Jus Ira, Jus Ivorio", "price": "500F / 1.000F", "wide": false },
+        { "name": "⚡ Energy Drinks", "items": "Cody's Energy, Energy Malt, XXL, Valpierre", "price": "1.000F", "wide": false },
+        { "name": "🍺 Bières", "items": "Téquilla 500F · Beaufort, Corona Extra, Doppel 33cl 800F · Desperados, Guinness, Racine, Bock, Sombreros 1.000F · Chill, Ivoire, Rhino 1.000F · Heineken, Budweiser 33cl 1.500F", "price": "", "wide": false },
+        { "name": "💧 Eaux minérales", "items": "Céleste, Awa, Akwabao, Éternelle, Kiréne, Olgane", "price": "500F", "wide": false },
+        { "name": "🍹 Jus naturels", "items": "Ananas · Bissap · Orange · Gingembre", "price": "1.000F", "wide": false },
+        { "name": "🧃 Jus importés", "items": "Ananas · Goyave · Mangue · Raisin · Pomme", "price": "500F / 1.000F", "wide": false },
+        { "name": "🍷 Vins Rouges", "items": "Bordeaux Rouge P. Sapin — 3.000F · Pavion de Pey Berlan — 7.000F · Hosman — 7.000F · Château Le Petit Courette — 8.000F · Château Le Verou — 10.000F · Château Bar Gentillot — 12.000F · Château Vernous — 15.000F · Château Grand Moulinet — 25.000F", "price": "", "wide": true }
+      ]
+    }
+  ]
+}
