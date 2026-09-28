@@ -5,6 +5,8 @@ page unique, panier → commande WhatsApp, déployé sur Cloudflare Workers.
 
 🔗 https://obig-menu.dertys01.workers.dev/
 
+**Design & réalisation : [Edertys](https://edertys.com)**
+
 ## Stack
 
 | Élément | Choix |
