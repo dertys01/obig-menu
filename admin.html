@@ -123,12 +123,10 @@ let activeTab = 0;
 async function tryLogin() {
   const key = document.getElementById('loginInput').value.trim();
   if (!key) return;
-  // Validate by trying a GET (any key works for GET; we'll verify on save)
-  // Actually test with a dummy POST to check key
-  const r = await fetch('/api/admin/save', {
-    method: 'POST',
-    headers: { 'X-Admin-Key': key, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ _check: true }),
+  // Vérification de la clé via un endpoint dédié : n'écrit JAMAIS dans la KV.
+  const r = await fetch('/api/admin/ping', {
+    method: 'GET',
+    headers: { 'X-Admin-Key': key },
   });
   if (r.status === 401) {
     document.getElementById('loginError').style.display = 'block';
@@ -324,6 +322,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   msg.textContent = '';
 
   try {
+    menuData.updatedAt = new Date().toISOString().slice(0, 10);
     const r = await fetch('/api/admin/save', {
       method: 'POST',
       headers: { 'X-Admin-Key': adminKey, 'Content-Type': 'application/json' },
