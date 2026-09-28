@@ -45,6 +45,7 @@
 
     /* ITEM ROW */
     .item-row { background: white; border-radius: var(--radius); padding: 14px; margin-bottom: 10px; border-left: 4px solid var(--green); box-shadow: 0 1px 6px rgba(0,0,0,0.04); }
+    .section-row { border-left-color: var(--gold); margin-bottom: 16px; }
     .item-row-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
     .item-row-fields.three { grid-template-columns: 2fr 2fr 1fr; }
     .field-label { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
@@ -180,6 +181,29 @@ function renderPanel(idx) {
   const panels = document.getElementById('panels');
   panels.innerHTML = '';
 
+  /* En-tête de section : titre / sous-titre / emoji (mêmes champs que les items) */
+  const head = document.createElement('div');
+  head.className = 'item-row section-row';
+  head.innerHTML = `
+    <div class="item-row-fields three">
+      <div>
+        <div class="field-label">Titre de la section</div>
+        <input class="field-input" data-cat="name" value="${esc(cat.name || '')}" />
+      </div>
+      <div>
+        <div class="field-label">Sous-titre</div>
+        <input class="field-input" data-cat="kicker" value="${esc(cat.kicker || '')}" placeholder="Texte de couverture" />
+      </div>
+      <div>
+        <div class="field-label">Emoji</div>
+        <input class="field-input" data-cat="emoji" value="${esc(cat.emoji || '')}" />
+      </div>
+    </div>`;
+  head.querySelectorAll('.field-input').forEach(inp => {
+    inp.addEventListener('input', () => { cat[inp.dataset.cat] = inp.value; });
+  });
+  panels.appendChild(head);
+
   if (cat.type === 'items') {
     renderItemsPanel(cat, panels);
   } else if (cat.type === 'tags') {
@@ -187,6 +211,20 @@ function renderPanel(idx) {
   } else if (cat.type === 'drinks') {
     renderDrinksPanel(cat, panels);
   }
+}
+
+/* Lie une rangée de champs à un tableau (gère price / priceAlt / prices[]) */
+function bindFields(container, list, i) {
+  container.querySelectorAll('.field-input').forEach(input => {
+    input.addEventListener('input', () => {
+      const target = list[parseInt(input.dataset.idx)];
+      if (input.dataset.field === 'prices') {
+        target.prices[parseInt(input.dataset.sub)] = input.value;
+      } else {
+        target[input.dataset.field] = input.value;
+      }
+    });
+  });
 }
 
 function renderItemsPanel(cat, container) {
@@ -221,6 +259,29 @@ function renderItemsPanel(cat, container) {
       cat.items.splice(idx, 1);
       renderPanel(activeTab);
     });
+
+    /* 2ᵉ / 3ᵉ tarif : rendu uniquement avec les champs que le menu utilise */
+    const extra = document.createElement('div');
+    if (Array.isArray(item.prices) && item.prices.length) {
+      extra.className = 'item-row-fields three';
+      extra.style.marginTop = '8px';
+      extra.innerHTML = item.prices.map((v, k) => `
+        <div>
+          <div class="field-label">Tarif ${k + 1}</div>
+          <input class="field-input" data-field="prices" data-sub="${k}" data-idx="${i}" value="${esc(String(v ?? ''))}" placeholder="ex. ${2000 + k * 500}" />
+        </div>`).join('');
+    } else {
+      extra.className = 'item-row-fields';
+      extra.style.marginTop = '8px';
+      extra.innerHTML = `
+        <div>
+          <div class="field-label">Prix 2 (optionnel)</div>
+          <input class="field-input" data-field="priceAlt" data-idx="${i}" value="${esc(item.priceAlt ?? '')}" placeholder="ex. 4000" />
+        </div>`;
+    }
+    bindFields(extra, cat.items, i);
+    row.querySelector('.item-actions').insertAdjacentElement('beforebegin', extra);
+
     container.appendChild(row);
   });
 
@@ -307,8 +368,61 @@ function renderDrinksPanel(cat, container) {
       cat.drinks.splice(parseInt(e.currentTarget.dataset.idx), 1);
       renderPanel(activeTab);
     });
+
+    const alt = document.createElement('div');
+    alt.className = 'item-row-fields';
+    alt.style.marginTop = '8px';
+    alt.innerHTML = `
+      <div>
+        <div class="field-label">Prix 2 (optionnel)</div>
+        <input class="field-input" data-field="priceAlt" data-idx="${i}" value="${esc(drink.priceAlt ?? '')}" placeholder="ex. 1500" />
+      </div>`;
+    bindFields(alt, cat.drinks, i);
+    row.querySelector('.item-actions').insertAdjacentElement('beforebegin', alt);
+
     container.appendChild(row);
   });
+
+  const addDrink = document.createElement('button');
+  addDrink.className = 'add-item-btn';
+  addDrink.innerHTML = '+ Ajouter une boisson';
+  addDrink.addEventListener('click', () => {
+    cat.drinks.push({ name: '', items: '', price: '' });
+    renderPanel(activeTab);
+  });
+  container.appendChild(addDrink);
+}
+
+// ─── NORMALISATION ─────────────────────────────────────────────────────────────
+// Prix saisis → nombres entiers FCFA ; champs vides supprimés (ne jamais casser
+// l'affichage du site : "3000" → 3000, "3 000 / 4 000" reste tel quel).
+const toInt = v => {
+  if (typeof v !== 'string') return v;
+  const digits = v.replace(/[\s\u00a0\u202f]/g, '');
+  return /^\d+$/.test(digits) ? parseInt(digits, 10) : v;
+};
+function normalize(m) {
+  (m.categories || []).forEach(cat => {
+    (cat.items || []).forEach(it => {
+      if ('price' in it) it.price = toInt(it.price);
+      if ('priceAlt' in it) {
+        it.priceAlt = toInt(it.priceAlt);
+        if (it.priceAlt === '' || it.priceAlt == null) delete it.priceAlt;
+      }
+      if (Array.isArray(it.prices)) {
+        const cleaned = it.prices.map(toInt).filter(p => p !== '' && p != null);
+        if (cleaned.length) it.prices = cleaned; else delete it.prices;
+      }
+    });
+    (cat.drinks || []).forEach(d => {
+      if ('price' in d) d.price = toInt(d.price);
+      if ('priceAlt' in d) {
+        d.priceAlt = toInt(d.priceAlt);
+        if (d.priceAlt === '' || d.priceAlt == null) delete d.priceAlt;
+      }
+    });
+  });
+  return m;
 }
 
 // ─── SAVE ──────────────────────────────────────────────────────────────────────
@@ -326,7 +440,7 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
     const r = await fetch('/api/admin/save', {
       method: 'POST',
       headers: { 'X-Admin-Key': adminKey, 'Content-Type': 'application/json' },
-      body: JSON.stringify(menuData),
+      body: JSON.stringify(normalize(menuData)),
     });
     if (r.ok) {
       msg.className = 'status-msg ok';

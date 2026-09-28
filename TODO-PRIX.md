@@ -39,7 +39,7 @@ Ils ne doivent pas être publiés comme définitifs sans validation.
 1. Modifier `menu.json` (prix en **nombre entier** : `3500`, jamais `"3.500F"`).
 2. Recharger la KV **sinon le site continuera d'afficher les anciens prix** :
    ```bash
-   npx wrangler kv key put menu --path menu.json --binding MENU_KV
+   npx wrangler kv key put menu --path menu.json --binding MENU_KV --remote
    ```
    ou via l'interface d'administration (`admin.html`) avec la clé d'admin.
 3. Vérifier sur le site : `/api/menu` doit renvoyer les nouveaux prix.
