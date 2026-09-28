@@ -113,3 +113,35 @@ responsive 390 px & 1440 px, absence d'erreurs JS.
 21 contrôles (`tests/admin.mjs`) : accès `/admin`, refus d'une mauvaise clé, 11
 sections éditables, 2ᵉ/3ᵉ tarifs éditables, ajout d'une boisson, aller-retour
 réel prix → API → restauration, prix restés en nombres entiers.
+
+## Clôture du chantier — 28 septembre 2026
+
+Fin de session : les accès **de développement** ont été fermés. Le site, lui,
+reste en ligne.
+
+| Accès | État |
+|---|---|
+| Token GitHub (PAT) | ❌ supprimé du trousseau macOS |
+| Session Cloudflare (`wrangler`) | ❌ déconnectée (`wrangler logout`) |
+| Serveur local `:8787` | ❌ arrêté |
+| https://obigfood.com + `/admin` | ✅ en ligne, inchangés |
+| Secret Cloudflare `ADMIN_KEY` | ✅ intact (mot de passe admin inchangé) |
+| Redirection `*.workers.dev` → obigfood.com | ✅ active (QR imprimés) |
+
+### Pour rouvrir la session
+
+```bash
+# 1. GitHub — nouveau token fine-grained sur dertys01/obig-menu
+#    Permissions : Contents → Read and write (sinon push en 403)
+#    puis : git credential approve  (ou gh auth login)
+
+# 2. Cloudflare — nouvelle session OAuth
+npx wrangler login
+
+# 3. aperçu local
+python3 -m http.server 8787
+```
+
+Puis, en cas de modification du menu : `npx wrangler deploy` →
+`npx wrangler kv key put menu --path menu.json --binding MENU_KV --remote`
+→ `node tests/qa.mjs` et `KEY=<clé> node tests/admin.mjs`.
