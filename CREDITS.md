@@ -8,7 +8,6 @@ tiers n'est utilisé en visuel.
 
 | Fichier utilisé | Fichier source | Usage |
 |---|---|---|
-| `img/obigfood.webp` | `obigfood.png` | Bannière / hero |
 | `img/salades.webp` | `salades.jpg` | Couverture « Salades » |
 | `img/sandwichs.webp` | `sandwichs.jpg` | Couverture « Sandwichs » |
 | `img/chawarma.webp` | `chawarma.jpg` | Couverture « Chawarmas » |
@@ -37,4 +36,5 @@ localement** (aucun hotlink).
 - Vérification de la licence **avant** intégration (métadonnées Openverse, titre + licence lus en texte).
 - Téléchargement en local + conversion WebP : le site ne dépend d'aucun tiers pour les images.
 - Chaque image a un `alt` (les couvertures de section sont décoratives : `alt=""`).
+- La bannière d'accueil n'est **pas** une photo : c'est un aplat CSS (dégradé + typographie), donc aucun crédit image pour le hero.
 - Aucune typographie ou icône tierce embarquée hors Google Fonts (licence SIL OFL).

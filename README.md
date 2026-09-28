@@ -28,7 +28,7 @@ admin.html      → interface d'édition du menu
 img/            → images WebP optimisées
 CREDITS.md      → provenance et licence de chaque image
 TODO-PRIX.md    → ⚠️ prix à valider avec le restaurant
-tests/qa.mjs    → contrôles automatisés (42 vérifications)
+tests/qa.mjs    → contrôles automatisés (43 vérifications)
 ```
 
 ## Données (`menu.json`)
@@ -84,6 +84,6 @@ Vérification : `curl -s https://obig-menu.dertys01.workers.dev/api/menu | head 
 node tests/qa.mjs
 ```
 
-42 contrôles : rendu des 11 sections / 102 plats, exactitude des prix, panier,
+43 contrôles : rendu des 11 sections / 102 plats, exactitude des prix, panier,
 message WhatsApp, recherche, scroll-spy, contrastes, cibles tactiles, responsive
 390 px & 1440 px, absence d'erreurs JS.

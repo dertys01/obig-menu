@@ -29,9 +29,14 @@ ok('pas de scroll horizontal desktop', (await page.evaluate(() => document.docum
 const fonts = await page.evaluate(async () => { await document.fonts.ready; return { a: document.fonts.check('16px Anton'), j: document.fonts.check('16px "Plus Jakarta Sans"') }; });
 ok('polices Anton + Plus Jakarta', fonts.a && fonts.j, JSON.stringify(fonts));
 
-/* hero : ratio respecté (l'attribut height ne doit pas écraser aspect-ratio) */
-const hero = await page.evaluate(() => { const r = document.querySelector('.hero-img').getBoundingClientRect(); return { w: Math.round(r.width), h: Math.round(r.height), ratio: +(r.width / r.height).toFixed(2) }; });
-ok('hero ratio ~2.5 (desktop)', Math.abs(hero.ratio - 2.5) < 0.15, JSON.stringify(hero));
+/* hero : bannière sobre — bandeau CSS, plus de photo pleine largeur */
+const hero = await page.evaluate(() => {
+  const band = document.querySelector('.hero-band');
+  const r = band ? band.getBoundingClientRect() : { height: 0 };
+  return { band: !!band, photoInHero: !!document.querySelector('.hero img'), h: Math.round(r.height) };
+});
+ok('hero sobre : bandeau CSS sans photo', hero.band && !hero.photoInHero, JSON.stringify(hero));
+ok('hero compact (40–200px desktop)', hero.h > 40 && hero.h <= 200, hero.h + 'px');
 
 /* ─── PRIX : vérité terrain des fichiers Drive ─── */
 const P = await page.evaluate(() => {
@@ -135,8 +140,8 @@ m.on('pageerror', e => out.errors.push('mobile pageerror: ' + e.message));
 await m.goto(BASE, { waitUntil: 'networkidle' });
 await m.waitForSelector('.section .card');
 ok('pas de scroll horizontal mobile 390px', (await m.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)) <= 1);
-const mh = await m.evaluate(() => { const r = document.querySelector('.hero-img').getBoundingClientRect(); return { h: Math.round(r.height), ratio: +(r.width / r.height).toFixed(2) }; });
-ok('hero mobile 16/9', Math.abs(mh.ratio - 1.78) < 0.1, JSON.stringify(mh));
+const mh = await m.evaluate(() => Math.round(document.querySelector('.hero-band').getBoundingClientRect().height));
+ok('hero mobile compact (≤ 140px)', mh > 30 && mh <= 140, mh + 'px');
 const tap = await m.evaluate(() => { const r = document.querySelector('.add').getBoundingClientRect(); return { w: Math.round(r.width), h: Math.round(r.height) }; });
 ok('cible tactile bouton Ajouter ≥ 44px', tap.h >= 44, JSON.stringify(tap));
 const pillH = await m.evaluate(() => Math.round(document.querySelector('.pill').getBoundingClientRect().height));

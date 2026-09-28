@@ -69,7 +69,10 @@ h1,h2,h3{margin:0;line-height:1.15}
 @keyframes pulse{70%{box-shadow:0 0 0 7px rgba(22,163,74,0)}100%{box-shadow:0 0 0 0 rgba(22,163,74,0)}}
 
 /* ═══ HERO ════════════════════════════════════════════════════════════════ */
-.hero-img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;background:#231a13}
+.hero-band{position:relative;display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,22px);padding:30px 16px;background:linear-gradient(180deg,#2C2017 0%,#231A13 100%);overflow:hidden}
+.hero-band::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 150% at 50% -30%,rgba(242,97,12,.30),transparent 62%)}
+.band-txt{position:relative;margin:0;font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(14px,3.2vw,19px);letter-spacing:3.4px;text-transform:uppercase;color:#F7E9DB;text-align:center;text-wrap:balance}
+.band-bar{position:relative;display:block;width:clamp(26px,7vw,56px);height:2px;background:rgba(247,233,219,.42);flex:0 0 auto}
 .hero-strip{border-bottom:1px solid var(--line);background:var(--bg)}
 .hero-strip .wrap{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between;padding-top:16px;padding-bottom:16px}
 .hero-txt{max-width:34rem}
@@ -233,7 +236,7 @@ footer a:hover{text-decoration:underline}
   .hero-cta .btn{flex:1 1 auto}
 }
 @media(min-width:768px){
-  .hero-img{aspect-ratio:16/6.4}
+  .hero-band{padding:38px 16px}
   body{font-size:15.5px}
 }
 </style>
@@ -256,8 +259,11 @@ footer a:hover{text-decoration:underline}
 </header>
 
 <section class="hero">
-  <img class="hero-img" src="img/obigfood.webp" width="1400" height="583" fetchpriority="high" decoding="async"
-       alt="O'big Food — Authenticité, Tradition, Passion : spécialités africaines et fast-food à Abidjan" />
+  <div class="hero-band">
+    <span class="band-bar" aria-hidden="true"></span>
+    <p class="band-txt">Authenticité · Tradition · Passion</p>
+    <span class="band-bar" aria-hidden="true"></span>
+  </div>
   <div class="hero-strip">
     <div class="wrap">
       <div class="hero-txt">
