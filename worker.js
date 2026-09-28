@@ -3,6 +3,12 @@ export default {
     const url = new URL(request.url);
     const { pathname } = url;
 
+    // ── Ancienne adresse workers.dev → redirection permanente vers le domaine ──
+    // (conserve fonctionnels les QR codes déjà imprimés au restaurant)
+    if (url.hostname.endsWith('.workers.dev')) {
+      return Response.redirect('https://obigfood.com' + url.pathname + url.search, 301);
+    }
+
     // ── GET /api/menu ─────────────────────────────────────────────────────────
     if (pathname === '/api/menu' && request.method === 'GET') {
       const data = await env.MENU_KV.get('menu', 'json');

@@ -1,7 +1,12 @@
 name = "obig-menu"
 compatibility_date = "2025-01-01"
 main = "worker.js"
-assets = { directory = ".", binding = "ASSETS" }
+workers_dev = true          # garde l'ancienne URL active → redirige vers obigfood.com
+assets = { directory = ".", binding = "ASSETS", run_worker_first = true }
+
+[[routes]]
+pattern = "obigfood.com"
+custom_domain = true
 
 [[kv_namespaces]]
 binding = "MENU_KV"

@@ -3,7 +3,7 @@
 Menu digital pour **O'big Food** (African Food & Drinks · Abidjan) :
 page unique, panier → commande WhatsApp, déployé sur Cloudflare Workers.
 
-🔗 https://obig-menu.dertys01.workers.dev/
+🔗 https://obigfood.com/
 
 **Design & réalisation : [Edertys](https://edertys.com)**
 
@@ -77,7 +77,7 @@ npx wrangler deploy
 npx wrangler kv key put menu --path menu.json --binding MENU_KV --remote
 ```
 
-Vérification : `curl -s https://obig-menu.dertys01.workers.dev/api/menu | head -c 200`
+Vérification : `curl -s https://obigfood.com/api/menu | head -c 200`
 
 ### Clé d'administration
 

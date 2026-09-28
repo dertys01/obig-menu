@@ -1,6 +1,6 @@
 import { createRequire } from 'module';
 
-const BASE = process.env.BASE || 'https://obig-menu.dertys01.workers.dev';
+const BASE = process.env.BASE || 'https://obigfood.com';
 const KEY = process.env.KEY;
 const _req = createRequire(import.meta.url);
 function req(p) { try { return _req('playwright'); } catch { return _req(p); } }
