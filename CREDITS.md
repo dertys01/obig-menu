@@ -8,6 +8,8 @@ tiers n'est utilisé en visuel.
 
 | Fichier utilisé | Fichier source | Usage |
 |---|---|---|
+| `img/logo.webp` | logo O'big Food (fichier fourni) | Écran d'accueil — fond blanc retiré, blancs conservés |
+| `img/affiche.webp` | affiche « MENU Restaurant-Bar » (fichier fourni) | Fond de l'écran d'accueil |
 | `img/salades.webp` | `salades.jpg` | Couverture « Salades » |
 | `img/sandwichs.webp` | `sandwichs.jpg` | Couverture « Sandwichs » |
 | `img/chawarma.webp` | `chawarma.jpg` | Couverture « Chawarmas » |

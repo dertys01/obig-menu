@@ -28,7 +28,7 @@ admin.html      → interface d'édition du menu
 img/            → images WebP optimisées
 CREDITS.md      → provenance et licence de chaque image
 TODO-PRIX.md    → ⚠️ prix à valider avec le restaurant
-tests/qa.mjs    → contrôles automatisés du site (43 vérifications)
+tests/qa.mjs    → contrôles automatisés du site (50 vérifications)
 tests/admin.mjs → contrôles automatisés de l'administration (21 vérifications)
 ```
 
@@ -103,8 +103,9 @@ node tests/qa.mjs
 KEY=<clé> node tests/admin.mjs
 ```
 
-43 contrôles (`tests/qa.mjs`) : rendu des 11 sections / 102 plats, exactitude des
-prix, panier, message WhatsApp, recherche, scroll-spy, contrastes, cibles tactiles,
+50 contrôles (`tests/qa.mjs`) : écran d'accueil (affichage 1ʳᵉ visite, fermeture,
+mémorisation), rendu des 11 sections / 102 plats, exactitude des prix, panier,
+message WhatsApp, recherche, scroll-spy, contrastes, cibles tactiles,
 responsive 390 px & 1440 px, absence d'erreurs JS.
 
 21 contrôles (`tests/admin.mjs`) : accès `/admin`, refus d'une mauvaise clé, 11

@@ -7,6 +7,9 @@
 <meta name="description" content="Menu complet O'big Food (Abidjan) : salades, chawarmas, burgers, pizzas, paninis, grillades, plats africains et boissons. Prix à jour, commande en 1 clic sur WhatsApp." />
 <meta name="theme-color" content="#FFFBF4" />
 <meta name="robots" content="index, follow" />
+<script>/* visiteur déjà venu : pas d'écran d'accueil (doit s'exécuter avant le rendu) */
+try { if (localStorage.getItem('obig-splash-v1')) document.documentElement.className += ' no-splash'; } catch (e) {}</script>
+<noscript><style>.splash{display:none!important}html{overflow:auto!important}</style></noscript>
 <link rel="canonical" href="https://obigfood.com/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="O'big Food" />
@@ -239,12 +242,56 @@ footer a:hover{text-decoration:underline}
   .hero-band{padding:38px 16px}
   body{font-size:15.5px}
 }
+
+/* ═══ ÉCRAN D'ACCUEIL ═══════════════════════════════════════════════════════ */
+html:not(.no-splash){overflow:hidden}          /* pas de scroll derrière */
+.splash{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;background:#1B130D;overflow:hidden;animation:splashIn .4s ease both}
+html.no-splash .splash{display:none}
+.splash-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.splash-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,14,8,.70),rgba(22,14,8,.52) 42%,rgba(22,14,8,.90))}
+.splash-in{position:relative;z-index:2;width:100%;max-width:34rem;padding:28px 20px;text-align:center;animation:splashUp .55s .08s ease both}
+.splash-logo{display:block;width:min(76vw,320px);height:auto;margin:0 auto;filter:drop-shadow(0 16px 36px rgba(0,0,0,.55))}
+.splash-kicker{margin:20px 0 6px;font-size:11px;font-weight:800;letter-spacing:3.2px;text-transform:uppercase;color:#F8D9A6}
+.splash-tag{margin:0 0 22px;font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(20px,5.6vw,30px);line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:#FFF7EF;text-shadow:0 2px 16px rgba(0,0,0,.55)}
+.splash-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn-wa{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.75)}
+.btn-wa:hover{background:#fff;color:var(--ink)}
+.splash-hours{display:inline-flex;align-items:center;gap:8px;margin:22px 0 0;font-size:12.5px;font-weight:700;color:#F2E2CE}
+.splash-hours .dot{width:8px;height:8px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 0 rgba(22,163,74,.5);animation:pulse 2s infinite}
+.splash-hours.closed .dot{background:#9C948A;animation:none}
+.splash-hours.closed{color:#DED3C6}
+.splash-skip{position:absolute;top:16px;right:16px;z-index:3;background:rgba(0,0,0,.34);border:1.5px solid rgba(255,255,255,.55);color:#fff;font-size:12.5px;font-weight:800;padding:9px 16px;border-radius:999px;cursor:pointer;transition:background .15s}
+.splash-skip:hover{background:rgba(0,0,0,.6)}
+.splash.closed{animation:splashOut .32s ease forwards;pointer-events:none}
+@keyframes splashIn{from{opacity:0}to{opacity:1}}
+@keyframes splashOut{to{opacity:0;transform:scale(1.03)}}
+@keyframes splashUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(max-width:400px){.splash-cta{flex-direction:column}.splash-cta .btn{width:100%}}
+@media(prefers-reduced-motion:reduce){.splash,.splash-in{animation:none!important}.splash.closed{display:none}}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Restaurant","name":"O'big Food","alternateName":"O'bigfood","servesCuisine":["Africaine","Fast-food","Pizza"],"telephone":"+2250708903332","url":"https://obigfood.com/","image":"obigfood.png","priceRange":"1 500 - 7 500 XOF","currenciesAccepted":"XOF","paymentAccepted":"Espèces","address":{"@type":"PostalAddress","addressLocality":"Abidjan","addressCountry":"CI"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"opens":"11:00","closes":"23:00"}],"hasMenu":"https://obigfood.com/"}
 </script>
 </head>
 <body>
+
+<!-- ═══ ÉCRAN D'ACCUEIL (1ʳᵉ visite) ═══════════════════════════════════════ -->
+<div class="splash" id="splash" role="dialog" aria-label="Bienvenue chez O'big Food">
+  <img class="splash-bg" src="img/affiche.webp" width="1080" height="1520" alt="" fetchpriority="high" decoding="async" />
+  <div class="splash-scrim" aria-hidden="true"></div>
+  <button type="button" class="splash-skip" id="skipBtn">Passer</button>
+  <div class="splash-in">
+    <img class="splash-logo" src="img/logo.webp" width="720" height="463" alt="Logo O'big Food" />
+    <p class="splash-kicker">Restaurant · Bar · Abidjan</p>
+    <p class="splash-tag">Authenticité · Tradition · Passion</p>
+    <div class="splash-cta">
+      <button type="button" class="btn btn-o" id="enterBtn">Voir le menu</button>
+      <a class="btn btn-wa" id="splashWa" href="#" target="_blank" rel="noopener">Commander sur WhatsApp</a>
+    </div>
+    <p class="splash-hours" id="splashHours"><span class="dot" aria-hidden="true"></span><span id="splashStatus">Ouvert · tous les jours 11h – 23h</span></p>
+  </div>
+</div>
+
 <a class="skip" href="#menu">Aller au menu</a>
 
 <header class="top">
@@ -648,6 +695,7 @@ function updateInfos(data) {
   const waText = encodeURIComponent("Bonjour O'big Food ! 👋 Je souhaite passer une commande.");
   $('#waBar').href = 'https://wa.me/' + WA + '?text=' + waText;
   $('#heroWa').href = 'https://wa.me/' + WA + '?text=' + waText;
+  $('#splashWa').href = 'https://wa.me/' + WA + '?text=' + waText;
   $('#infoWa').href = 'https://wa.me/' + WA + '?text=' + waText;
 
   const z = $('#zones');
@@ -667,8 +715,26 @@ function updateInfos(data) {
     $('#statusShort').textContent = open ? 'Ouvert' : 'Fermé';
     el.classList.toggle('closed', !open);
     $('#infoStatus').textContent = open ? '● Ouvert en ce moment' : '● Actuellement fermé';
+    $('#splashStatus').textContent = open ? `Ouvert · jusqu'à ${r.closeHour ?? 23}h` : `Fermé · ouvre à ${r.openHour ?? 11}h`;
+    $('#splashHours').classList.toggle('closed', !open);
   } catch (e) { /* statut indisponible : on n'affiche rien de faux */ }
 }
+
+/* ═══ ÉCRAN D'ACCUEIL ═════════════════════════════════════════════════════ */
+const splash = $('#splash');
+function closeSplash() {
+  if (!splash || splash.classList.contains('closed')) return;
+  splash.classList.add('closed');
+  splash.setAttribute('aria-hidden', 'true');
+  document.documentElement.classList.add('no-splash');   // rétablit le scroll
+  try { localStorage.setItem('obig-splash-v1', String(Date.now())); } catch (e) { /* mode privé */ }
+  setTimeout(() => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }, 340);
+}
+$('#enterBtn').addEventListener('click', closeSplash);
+$('#skipBtn').addEventListener('click', closeSplash);
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !document.documentElement.classList.contains('no-splash')) closeSplash();
+});
 
 /* ═══ BOOT ═══════════════════════════════════════════════════════════════ */
 fetch('/api/menu', { cache: 'no-cache' })

@@ -21,6 +21,18 @@ page.on('response', r => { if (r.status() >= 400 && !ignore(r.url())) out.errors
 await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector('.section .card', { timeout: 8000 });
 
+/* ─── ÉCRAN D'ACCUEIL ─── */
+ok('écran d’accueil visible (1ʳe visite)', await page.locator('#splash').isVisible());
+ok('logo + affiche affichés', (await page.locator('.splash-logo').isVisible()) && (await page.locator('.splash-bg').isVisible()));
+ok('CTA WhatsApp sur l’accueil', (await page.locator('#splashWa').getAttribute('href')).startsWith('https://wa.me/2250708903332'));
+await page.click('#enterBtn');
+await page.waitForTimeout(700);
+ok('écran d’accueil fermé après « Voir le menu »', !(await page.locator('#splash').isVisible()));
+ok('scroll rétabli après fermeture', await page.evaluate(() => getComputedStyle(document.documentElement).overflow !== 'hidden'));
+await page.reload({ waitUntil: 'networkidle' });
+await page.waitForSelector('.section .card', { timeout: 8000 });
+ok('visiteur suivant : pas d’écran d’accueil', !(await page.locator('#splash').isVisible()));
+
 ok('sections rendues (11)', await page.locator('.section').count() === 11, `${await page.locator('.section').count()}`);
 ok('cartes rendues (102)', await page.locator('.card').count() === 102, `${await page.locator('.card').count()}`);
 ok('pills nav (11)', await page.locator('.pill').count() === 11);
@@ -139,6 +151,8 @@ m.on('console', x => { if (x.type() === 'error' && !ignore(x.text())) out.errors
 m.on('pageerror', e => out.errors.push('mobile pageerror: ' + e.message));
 await m.goto(BASE, { waitUntil: 'networkidle' });
 await m.waitForSelector('.section .card');
+if (await m.locator('#splash').isVisible()) { await m.click('#enterBtn'); await m.waitForTimeout(700); }
+ok('mobile : écran d’accueil fermé', !(await m.locator('#splash').isVisible()));
 ok('pas de scroll horizontal mobile 390px', (await m.evaluate(() => document.documentElement.scrollWidth - window.innerWidth)) <= 1);
 const mh = await m.evaluate(() => Math.round(document.querySelector('.hero-band').getBoundingClientRect().height));
 ok('hero mobile compact (≤ 140px)', mh > 30 && mh <= 140, mh + 'px');
