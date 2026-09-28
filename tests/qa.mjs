@@ -143,6 +143,9 @@ ok('alt sur toutes les images', noAlt === 0);
 
 /* ─── CTA ─── */
 ok('CTA WhatsApp direct', (await page.locator('#waBar').getAttribute('href')).startsWith('https://wa.me/2250708903332'));
+const waBtns = await page.evaluate(() => [...document.querySelectorAll('.btn-wa')].filter(b => !b.closest('#splash')).map(b => ({ id: b.id || b.className, bg: getComputedStyle(b).backgroundColor, col: getComputedStyle(b).color })));
+ok('boutons WhatsApp verts hors accueil (' + waBtns.length + ')', waBtns.length >= 3 && waBtns.every(b => b.bg === 'rgb(37, 211, 102)'), JSON.stringify(waBtns));
+ok('texte des boutons WhatsApp lisible (fond ≠ texte)', waBtns.every(b => b.col !== b.bg && b.col !== 'rgba(0, 0, 0, 0)'), JSON.stringify(waBtns.map(b => b.col)));
 ok('JSON-LD Restaurant', await page.evaluate(() => { const d = JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent); return d['@type'] === 'Restaurant' && d.telephone.includes('2250708903332'); }));
 ok('titre + meta description', (await page.title()).includes("O'big Food") && (await page.locator('meta[name="description"]').getAttribute('content')).length > 80);
 
