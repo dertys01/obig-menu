@@ -1,1 +1,4 @@
 tests/
+.git/
+.wrangler/
+TODO-PRIX.md
