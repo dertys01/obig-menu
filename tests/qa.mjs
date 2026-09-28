@@ -22,7 +22,7 @@ await page.goto(BASE, { waitUntil: 'networkidle' });
 await page.waitForSelector('.section .card', { timeout: 8000 });
 
 /* ─── ÉCRAN D'ACCUEIL ─── */
-ok('écran d’accueil visible (1ʳe visite)', await page.locator('#splash').isVisible());
+ok('écran d’accueil visible au chargement', await page.locator('#splash').isVisible());
 ok('logo + affiche affichés', (await page.locator('.splash-logo').isVisible()) && (await page.locator('.splash-bg').isVisible()));
 ok('CTA WhatsApp sur l’accueil', (await page.locator('#splashWa').getAttribute('href')).startsWith('https://wa.me/2250708903332'));
 await page.click('#enterBtn');
@@ -31,7 +31,12 @@ ok('écran d’accueil fermé après « Voir le menu »', !(await page.locator('
 ok('scroll rétabli après fermeture', await page.evaluate(() => getComputedStyle(document.documentElement).overflow !== 'hidden'));
 await page.reload({ waitUntil: 'networkidle' });
 await page.waitForSelector('.section .card', { timeout: 8000 });
-ok('visiteur suivant : pas d’écran d’accueil', !(await page.locator('#splash').isVisible()));
+await page.waitForTimeout(400);
+ok('écran d’accueil ré-affiché à chaque visite', await page.locator('#splash').isVisible());
+ok('logo dans la barre du haut', await page.locator('.mark img').isVisible());
+await page.click('#enterBtn');
+await page.waitForTimeout(700);
+ok('menu utilisable après 2ᵉ fermeture', await page.evaluate(() => getComputedStyle(document.documentElement).overflow !== 'hidden'));
 
 ok('sections rendues (11)', await page.locator('.section').count() === 11, `${await page.locator('.section').count()}`);
 ok('cartes rendues (102)', await page.locator('.card').count() === 102, `${await page.locator('.card').count()}`);

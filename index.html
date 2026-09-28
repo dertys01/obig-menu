@@ -7,8 +7,6 @@
 <meta name="description" content="Menu complet O'big Food (Abidjan) : salades, chawarmas, burgers, pizzas, paninis, grillades, plats africains et boissons. Prix à jour, commande en 1 clic sur WhatsApp." />
 <meta name="theme-color" content="#FFFBF4" />
 <meta name="robots" content="index, follow" />
-<script>/* visiteur déjà venu : pas d'écran d'accueil (doit s'exécuter avant le rendu) */
-try { if (localStorage.getItem('obig-splash-v1')) document.documentElement.className += ' no-splash'; } catch (e) {}</script>
 <noscript><style>.splash{display:none!important}html{overflow:auto!important}</style></noscript>
 <link rel="canonical" href="https://obigfood.com/" />
 <meta property="og:type" content="website" />
@@ -60,7 +58,8 @@ h1,h2,h3{margin:0;line-height:1.15}
 /* ═══ TOPBAR ══════════════════════════════════════════════════════════════ */
 .top{background:var(--bg);border-bottom:1px solid var(--line)}
 .top-in{max-width:var(--maxw);margin:0 auto;padding:12px 16px;display:flex;align-items:center;gap:12px}
-.mark{width:38px;height:38px;border-radius:12px;background:var(--o);color:#FFFBF4;display:grid;place-items:center;font-weight:800;font-size:14px;letter-spacing:-.5px;flex:0 0 auto}
+.mark{flex:0 0 auto;display:block}
+.mark img{display:block;height:36px;width:auto;filter:drop-shadow(0 1px 3px rgba(0,0,0,.18))}
 .brand{display:flex;flex-direction:column;min-width:0}
 .brand b{font-family:'Anton',sans-serif;font-size:19px;letter-spacing:.6px;text-transform:uppercase;font-weight:400}
 .brand span{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:var(--mut);font-weight:700;white-space:nowrap}
@@ -235,6 +234,7 @@ footer a:hover{text-decoration:underline}
   #statusShort{display:inline}
   .status{font-size:11.5px;padding:7px 11px}
   .brand span{font-size:9.5px;letter-spacing:1.6px}
+  .mark img{height:30px}
   .hero-cta{width:100%}
   .hero-cta .btn{flex:1 1 auto}
 }
@@ -248,9 +248,9 @@ html:not(.no-splash){overflow:hidden}          /* pas de scroll derrière */
 .splash{position:fixed;inset:0;z-index:95;display:flex;align-items:center;justify-content:center;background:#1B130D;overflow:hidden;animation:splashIn .4s ease both}
 html.no-splash .splash{display:none}
 .splash-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 42%}
-.splash-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,14,8,.70),rgba(22,14,8,.52) 42%,rgba(22,14,8,.90))}
+.splash-scrim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,14,8,.75),rgba(22,14,8,.56) 42%,rgba(22,14,8,.92))}
 .splash-in{position:relative;z-index:2;width:100%;max-width:34rem;padding:28px 20px;text-align:center;animation:splashUp .55s .08s ease both}
-.splash-logo{display:block;width:min(76vw,320px);height:auto;margin:0 auto;filter:drop-shadow(0 16px 36px rgba(0,0,0,.55))}
+.splash-logo{display:block;width:min(84vw,360px);height:auto;margin:0 auto;filter:drop-shadow(0 16px 36px rgba(0,0,0,.55))}
 .splash-kicker{margin:20px 0 6px;font-size:11px;font-weight:800;letter-spacing:3.2px;text-transform:uppercase;color:#F8D9A6}
 .splash-tag{margin:0 0 22px;font-family:'Anton',sans-serif;font-weight:400;font-size:clamp(20px,5.6vw,30px);line-height:1.2;letter-spacing:.6px;text-transform:uppercase;color:#FFF7EF;text-shadow:0 2px 16px rgba(0,0,0,.55)}
 .splash-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
@@ -275,14 +275,14 @@ html.no-splash .splash{display:none}
 </head>
 <body>
 
-<!-- ═══ ÉCRAN D'ACCUEIL (1ʳᵉ visite) ═══════════════════════════════════════ -->
+<!-- ═══ ÉCRAN D'ACCUEIL (affiché à chaque visite) ═══════════════════════════ -->
 <div class="splash" id="splash" role="dialog" aria-label="Bienvenue chez O'big Food">
   <img class="splash-bg" src="img/affiche.webp" width="1080" height="1520" alt="" fetchpriority="high" decoding="async" />
   <div class="splash-scrim" aria-hidden="true"></div>
   <button type="button" class="splash-skip" id="skipBtn">Passer</button>
   <div class="splash-in">
     <img class="splash-logo" src="img/logo.webp" width="720" height="463" alt="Logo O'big Food" />
-    <p class="splash-kicker">Restaurant · Bar · Abidjan</p>
+    <p class="splash-kicker">African Food &amp; Drinks · Abidjan</p>
     <p class="splash-tag">Authenticité · Tradition · Passion</p>
     <div class="splash-cta">
       <button type="button" class="btn btn-o" id="enterBtn">Voir le menu</button>
@@ -296,7 +296,7 @@ html.no-splash .splash{display:none}
 
 <header class="top">
   <div class="top-in">
-    <div class="mark" aria-hidden="true">OB</div>
+    <div class="mark" aria-hidden="true"><img src="img/logo.webp" width="720" height="463" alt="" /></div>
     <div class="brand">
       <b>O'big Food</b>
       <span>African Food &amp; Drinks</span>
@@ -727,7 +727,6 @@ function closeSplash() {
   splash.classList.add('closed');
   splash.setAttribute('aria-hidden', 'true');
   document.documentElement.classList.add('no-splash');   // rétablit le scroll
-  try { localStorage.setItem('obig-splash-v1', String(Date.now())); } catch (e) { /* mode privé */ }
   setTimeout(() => { if (document.activeElement && document.activeElement.blur) document.activeElement.blur(); }, 340);
 }
 $('#enterBtn').addEventListener('click', closeSplash);
